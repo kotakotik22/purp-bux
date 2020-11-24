@@ -98,7 +98,6 @@ public class BuxStation extends Block {
                     }
                 };
                 NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
-//                NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity);
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }

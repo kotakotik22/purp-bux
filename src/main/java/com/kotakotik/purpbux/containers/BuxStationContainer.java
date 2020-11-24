@@ -18,8 +18,8 @@ import net.minecraftforge.items.wrapper.InvWrapper;
 
 public class BuxStationContainer extends Container {
     public TileEntity tileEntity;
-    private PlayerEntity playerEntity;
-    private InvWrapper playerInventory;
+    private final PlayerEntity playerEntity;
+    private final InvWrapper playerInventory;
 
     @Override
     public boolean canInteractWith(PlayerEntity playerIn) {
@@ -61,41 +61,91 @@ public class BuxStationContainer extends Container {
 
     @Override
     public ItemStack transferStackInSlot(PlayerEntity playerIn, int index) {
+//        ItemStack itemstack = ItemStack.EMPTY;
+//        Slot slot = this.inventorySlots.get(index);
+//        if (slot != null && slot.getHasStack()) {
+//            ItemStack stack = slot.getStack();
+//            itemstack = stack.copy();
+//            FurnaceContainer
+//            if (index == 0 ) {
+//                if (!this.mergeItemStack(stack, 1, 37, true)) {
+//                    return ItemStack.EMPTY;
+//                }
+//                slot.onSlotChange(stack, itemstack);
+//            } else {
+//                if (stack.getItem() == Items.PAPER) {
+//                    if (!this.mergeItemStack(stack, 0, 1, false)) {
+//                        return ItemStack.EMPTY;
+//                    }
+//                } else if(stack.getItem() == Items.EXPERIENCE_BOTTLE) {
+//                    if (!this.mergeItemStack(stack, 1, 2, false)) {
+//                        return ItemStack.EMPTY;
+//                    }
+//                } else if (index < 28) {
+//                    if (!this.mergeItemStack(stack, 28, 37, false)) {
+//                        return ItemStack.EMPTY;
+//                    }
+//                } else if (index < 37 && !this.mergeItemStack(stack, 1, 28, false)) {
+//                    return ItemStack.EMPTY;
+//                }
+//            }
+//
+//            if (stack.isEmpty()) {
+//                slot.putStack(ItemStack.EMPTY);
+//            } else {
+//                slot.onSlotChanged();
+//            }
+//
+//            if (stack.getCount() == itemstack.getCount()) {
+//                return ItemStack.EMPTY;
+//            }
+//
+//            slot.onTake(playerIn, stack);
+//        }
+//
+//        return itemstack;
         ItemStack itemstack = ItemStack.EMPTY;
         Slot slot = this.inventorySlots.get(index);
         if (slot != null && slot.getHasStack()) {
-            ItemStack stack = slot.getStack();
-            itemstack = stack.copy();
-            if (index == 0) {
-                if (!this.mergeItemStack(stack, 1, 37, true)) {
+            ItemStack itemstack1 = slot.getStack();
+            itemstack = itemstack1.copy();
+            if (index == 2) {
+                if (!this.mergeItemStack(itemstack1, 3, 39, true)) {
                     return ItemStack.EMPTY;
                 }
-                slot.onSlotChange(stack, itemstack);
-            } else {
-                if (stack.getItem() == Items.PAPER || stack.getItem() == Items.EXPERIENCE_BOTTLE) {
-                    if (!this.mergeItemStack(stack, 0, 1, false)) {
+
+                slot.onSlotChange(itemstack1, itemstack);
+            } else if (index != 1 && index != 0) {
+                if (itemstack1.getItem() == Items.PAPER) {
+                    if (!this.mergeItemStack(itemstack1, 0, 1, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < 28) {
-                    if (!this.mergeItemStack(stack, 28, 37, false)) {
+                } else if (itemstack1.getItem() == Items.EXPERIENCE_BOTTLE) {
+                    if (!this.mergeItemStack(itemstack1, 1, 2, false)) {
                         return ItemStack.EMPTY;
                     }
-                } else if (index < 37 && !this.mergeItemStack(stack, 1, 28, false)) {
+                } else if (index >= 3 && index < 30) {
+                    if (!this.mergeItemStack(itemstack1, 30, 39, false)) {
+                        return ItemStack.EMPTY;
+                    }
+                } else if (index >= 30 && index < 39 && !this.mergeItemStack(itemstack1, 3, 30, false)) {
                     return ItemStack.EMPTY;
                 }
+            } else if (!this.mergeItemStack(itemstack1, 3, 39, false)) {
+                return ItemStack.EMPTY;
             }
 
-            if (stack.isEmpty()) {
+            if (itemstack1.isEmpty()) {
                 slot.putStack(ItemStack.EMPTY);
             } else {
                 slot.onSlotChanged();
             }
 
-            if (stack.getCount() == itemstack.getCount()) {
+            if (itemstack1.getCount() == itemstack.getCount()) {
                 return ItemStack.EMPTY;
             }
 
-            slot.onTake(playerIn, stack);
+            slot.onTake(playerIn, itemstack1);
         }
 
         return itemstack;

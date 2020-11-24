@@ -50,8 +50,6 @@ public class BuxStationScreen extends ContainerScreen<BuxStationContainer> {
         int i = ClientStorage.BuxStationProgress;
         int j = ClientStorage.BuxStationTotalProgress;
 
-        System.out.println("i: "+i);
-        System.out.println("j: "+j);
         return j != 0 && i != 0 ? i * 24 / j : 0;
     }
 }
