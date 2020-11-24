@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "purpbux:block/bux_station",
+    "up": "purpbux:block/bux_station_top",
+    "north": "purpbux:block/bux_station_powered",
+    "south": "purpbux:block/bux_station",
+    "east": "purpbux:block/bux_station",
+    "west": "purpbux:block/bux_station",
+    "particle": "purpbux:block/bux_station"
+  }
+}

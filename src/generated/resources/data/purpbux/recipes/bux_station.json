@@ -1,0 +1,37 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "rhr",
+    "bed",
+    "sgi"
+  ],
+  "key": {
+    "r": {
+      "item": "minecraft:redstone"
+    },
+    "h": {
+      "item": "minecraft:hopper"
+    },
+    "b": {
+      "item": "minecraft:brewing_stand"
+    },
+    "e": {
+      "item": "minecraft:emerald_block"
+    },
+    "d": {
+      "item": "minecraft:dropper"
+    },
+    "s": {
+      "item": "minecraft:sugar_cane"
+    },
+    "g": {
+      "item": "minecraft:redstone_lamp"
+    },
+    "i": {
+      "tag": "forge:gems/diamond"
+    }
+  },
+  "result": {
+    "item": "purpbux:bux_station"
+  }
+}

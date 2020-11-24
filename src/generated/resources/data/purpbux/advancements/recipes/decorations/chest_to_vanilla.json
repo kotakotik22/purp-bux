@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "purpbux:chest_to_vanilla"
+    ]
+  },
+  "criteria": {
+    "wood": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:chests"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "purpbux:chest_to_vanilla"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wood",
+      "has_the_recipe"
+    ]
+  ]
+}
