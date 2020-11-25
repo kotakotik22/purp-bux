@@ -32,13 +32,16 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
 
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
+//    private final NoDirect items = createItemHandler();
+//    private final LazyOptional<AutomationFilterItemHander> itemHandler = LazyOptional.of(() -> new AutomationFilterItemHander(items));
+
     public BuxStationTile() {
         super(ModTiles.BUX_STATION_TILE.get());
     }
 
     public final IIntArray stationData = new IIntArray() {
         public int get(int index) {
-            switch(index) {
+            switch (index) {
                 case 0:
                     return BuxStationTile.this.progress;
                 case 1:
@@ -153,16 +156,6 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
     private ItemStackHandler createHandler() {
         return new ItemStackHandler(3) {
             private boolean checkIfOk(int slot, ItemStack stack) {
-//                boolean isValid = false;
-//                switch(slot) {
-//                    case 0:
-//                        isValid = stack.getItem() == Items.PAPER;
-//                    case 1:
-//                        isValid = stack.getItem() == Items.EXPERIENCE_BOTTLE;
-//                    case 2:
-//                        isValid = false;
-//                }
-//                return isValid;
                 if(slot == 0) {
                     return stack.getItem() == Items.PAPER;
                 } else if(slot == 1) {
@@ -187,9 +180,6 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
             @Nonnull
             @Override
             public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-//                if (stack.getItem() != Items.PAPER) {
-//                    return stack;
-//                }
                 if(!checkIfOk(slot, stack)) {
                     return stack;
                 }
@@ -202,7 +192,7 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && side != Direction.DOWN /* Completely disables hopper output, TODO: enable station hopper output and make it only extract bux */) {
             return handler.cast();
         }
         return super.getCapability(cap, side);
@@ -233,12 +223,14 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
 //        }
 
 //        System.out.println(world.isRemote);
-        if (ClientStorage.BuxStationCurrentPos.equals(pos)) {
-            CompoundNBT nbt = pkt.getNbtCompound();
-            ClientStorage.BuxStationProgress = nbt.getInt("progress");
-            ClientStorage.BuxStationTotalProgress = nbt.getInt("totalProgress");
-        } else {
-            ClientStorage.BuxStationProgress = 0;
+        if (ClientStorage.BuxStationCurrentPos != null) {
+            if (ClientStorage.BuxStationCurrentPos.equals(pos)) {
+                CompoundNBT nbt = pkt.getNbtCompound();
+                ClientStorage.BuxStationProgress = nbt.getInt("progress");
+                ClientStorage.BuxStationTotalProgress = nbt.getInt("totalProgress");
+            } else {
+                ClientStorage.BuxStationProgress = 0;
+            }
         }
     }
 
