@@ -233,9 +233,13 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
 //        }
 
 //        System.out.println(world.isRemote);
-        CompoundNBT nbt = pkt.getNbtCompound();
-        ClientStorage.BuxStationProgress = nbt.getInt("progress");
-        ClientStorage.BuxStationTotalProgress = nbt.getInt("totalProgress");
+        if (ClientStorage.BuxStationCurrentPos.equals(pos)) {
+            CompoundNBT nbt = pkt.getNbtCompound();
+            ClientStorage.BuxStationProgress = nbt.getInt("progress");
+            ClientStorage.BuxStationTotalProgress = nbt.getInt("totalProgress");
+        } else {
+            ClientStorage.BuxStationProgress = 0;
+        }
     }
 
     @Override

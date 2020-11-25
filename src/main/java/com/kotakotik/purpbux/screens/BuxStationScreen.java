@@ -16,6 +16,7 @@ public class BuxStationScreen extends ContainerScreen<BuxStationContainer> {
 
     public BuxStationScreen(BuxStationContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
+        ClientStorage.BuxStationCurrentPos = container.tileEntity.getPos();
     }
 
     @Override
