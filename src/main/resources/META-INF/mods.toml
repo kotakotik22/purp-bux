@@ -18,7 +18,7 @@ issueTrackerURL="http://my.issue.tracker/" #optional
 modId="purpbux" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 version="${file.jarVersion}" #mandatory
- # A display name for the mod
+# A display name for the mod
 displayName="PurpBux" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
@@ -35,21 +35,22 @@ description='''
 A mod that adds money to the game, based on sveltebux
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.examplemod]] #optional
-    # the modid of the dependency
-    modId="forge" #mandatory
-    # Does this dependency have to exist - if not, ordering below must be specified
-    mandatory=true #mandatory
-    # The version range of the dependency
-    versionRange="[34,)" #mandatory
-    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
-    ordering="NONE"
-    # Side this dependency is applied on - BOTH, CLIENT or SERVER
-    side="BOTH"
+[[dependencies.purpbux]] #optional
+# the modid of the dependency
+modId = "forge" #mandatory
+# Does this dependency have to exist - if not, ordering below must be specified
+mandatory = true #mandatory
+# The version range of the dependency
+versionRange = "[35,)" #mandatory
+# An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+ordering = "NONE"
+# Side this dependency is applied on - BOTH, CLIENT or SERVER
+side = "BOTH"
 # Here's another dependency
 [[dependencies.purpbux]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.16.3]"
-    ordering="NONE"
-    side="BOTH"
+modId = "minecraft"
+mandatory = true
+# This version range declares a minimum of the current minecraft version up to but not including the next major version
+versionRange = "[1.16.4,1.17)"
+ordering = "NONE"
+side = "BOTH"
