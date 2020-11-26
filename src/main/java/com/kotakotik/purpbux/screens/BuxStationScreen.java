@@ -16,7 +16,6 @@ public class BuxStationScreen extends ContainerScreen<BuxStationContainer> {
 
     public BuxStationScreen(BuxStationContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
-        ClientStorage.BuxStationCurrentPos = container.tileEntity.getPos();
     }
 
     @Override
@@ -35,6 +34,7 @@ public class BuxStationScreen extends ContainerScreen<BuxStationContainer> {
         this.blit(matrixStack, i, j, 0, 0, this.xSize, this.ySize);
 
         int l = getCookProgressionScaled();
+        System.out.println(l + ClientStorage.BuxStationCurrentPos.getCoordinatesAsString());
         this.blit(matrixStack, i + 79, j + 34, 176, 14, l + 1, 16);
     }
 

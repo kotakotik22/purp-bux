@@ -223,13 +223,14 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
 //        }
 
 //        System.out.println(world.isRemote);
+
+//        System.out.println(pos.getCoordinatesAsString() + ": " + ClientStorage.BuxStationCurrentPos.getCoordinatesAsString() + ", " + ClientStorage.BuxStationCurrentPos.equals(pos));
+
         if (ClientStorage.BuxStationCurrentPos != null) {
             if (ClientStorage.BuxStationCurrentPos.equals(pos)) {
                 CompoundNBT nbt = pkt.getNbtCompound();
                 ClientStorage.BuxStationProgress = nbt.getInt("progress");
                 ClientStorage.BuxStationTotalProgress = nbt.getInt("totalProgress");
-            } else {
-                ClientStorage.BuxStationProgress = 0;
             }
         }
     }

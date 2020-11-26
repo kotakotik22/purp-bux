@@ -1,11 +1,13 @@
 package com.kotakotik.purpbux.blocks;
 
+import com.kotakotik.purpbux.ClientStorage;
 import com.kotakotik.purpbux.containers.BuxStationContainer;
 import com.kotakotik.purpbux.tiles.BuxStationTile;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -100,6 +102,10 @@ public class BuxStation extends Block {
                 NetworkHooks.openGui((ServerPlayerEntity) player, containerProvider, tileEntity.getPos());
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
+            }
+        } else {
+            if (player.equals(Minecraft.getInstance().player)) {
+                ClientStorage.BuxStationCurrentPos = pos;
             }
         }
         return ActionResultType.SUCCESS;
