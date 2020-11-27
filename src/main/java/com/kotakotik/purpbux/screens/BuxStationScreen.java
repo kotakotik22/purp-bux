@@ -38,15 +38,6 @@ public class BuxStationScreen extends ContainerScreen<BuxStationContainer> {
     }
 
     public int getCookProgressionScaled() {
-//        int i = this.container.tileEntity.getTileData().getInt("progress");
-//        int j = this.container.tileEntity.getTileData().getInt("totalProgress");
-//        this.container.tileEntity.getTileData().
-//        int i = BuxStationProgressUpdate.getProgress();
-//        int j = BuxStationProgressUpdate.getTotalProgress();
-
-//        ;
-//        AbstractFurnaceContainer
-
         int i = ClientStorage.BuxStationProgress;
         int j = ClientStorage.BuxStationTotalProgress;
 

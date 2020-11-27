@@ -32,9 +32,6 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
 
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
-//    private final NoDirect items = createItemHandler();
-//    private final LazyOptional<AutomationFilterItemHander> itemHandler = LazyOptional.of(() -> new AutomationFilterItemHander(items));
-
     public BuxStationTile() {
         super(ModTiles.BUX_STATION_TILE.get());
     }
@@ -105,7 +102,6 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
             setWorking(false);
 
             if(progress != 0) {
-//                ModPacketHandler.sendToClient(new BuxStationProgressUpdate(), );
                 markDirty();
                 progress = 0;
                 world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
@@ -119,22 +115,9 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
         handler.invalidate();
     }
 
-//    @Override
-//    public void fun(CompoundNBT tag) {
-//        itemHandler.deserializeNBT(tag.getCompound("inv"));
-//        energyStorage.deserializeNBT(tag.getCompound("energy"));
-//
-//        counter = tag.getInt("counter");
-//        super.read(tag);
-//    }
-
-
     @Override
     public void read(BlockState state, CompoundNBT tag) {
         itemHandler.deserializeNBT(tag.getCompound("inv"));
-//        System.out.println("re");
-
-//        progress = tag.getInt("progress");
         totalProgress = tag.getInt("totalProgress");
         progress = tag.getInt("progress");
 
@@ -145,10 +128,7 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
     public CompoundNBT write(CompoundNBT tag) {
         tag.put("inv", itemHandler.serializeNBT());
 
-//        System.out.println("wr");
-
         tag.putInt("progress", progress);
-//        System.out.println(progress);
         tag.putInt("totalProgress", totalProgress);
         return super.write(tag);
     }
@@ -159,21 +139,18 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
                 if(slot == 0) {
                     return stack.getItem() == Items.PAPER;
                 } else if(slot == 1) {
-                    return stack.getItem() == Items.EXPERIENCE_BOTTLE;
+                    return stack.getItem() == ModItems.EXP_BOTTLE.get();
                 }
                 return false;
             }
 
             @Override
             protected void onContentsChanged(int slot) {
-                // To make sure the TE persists when the chunk is saved later we need to
-                // mark it dirty every time the item handler changes
                 markDirty();
             }
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-//                return (stack.getItem() == Items.PAPER);
                 return checkIfOk(slot, stack);
             }
 
@@ -198,34 +175,10 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
         return super.getCapability(cap, side);
     }
 
-//    @Override
-//    public void handleUpdateTag(BlockState blockState, CompoundNBT parentNBTTagCompound)
-//    {
-//        this.read(blockState, parentNBTTagCompound);
-////        System.out.println(world.isRemote);
-//        if(world.isRemote) {
-////            getUpdateTag()
-//            System.out.println(parentNBTTagCompound.getInt("progress"));
-//        }
-//    }
-
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         BlockState blockState = world.getBlockState(pos);
-        read(blockState, pkt.getNbtCompound());   // read from the nbt in the packet
-//        System.out.println(pkt.getNbtCompound().);
-
-//        int i = 0;
-//        for(String st : pkt.getNbtCompound().keySet()) {
-//            System.out.println(st + ": " + pkt.getNbtCompound().get(st).getString());
-//            System.out.println(st);
-//            i++;
-//        }
-
-//        System.out.println(world.isRemote);
-
-//        System.out.println(pos.getCoordinatesAsString() + ": " + ClientStorage.BuxStationCurrentPos.getCoordinatesAsString() + ", " + ClientStorage.BuxStationCurrentPos.equals(pos));
-
+        read(blockState, pkt.getNbtCompound());
         if (ClientStorage.BuxStationCurrentPos != null) {
             if (ClientStorage.BuxStationCurrentPos.equals(pos)) {
                 CompoundNBT nbt = pkt.getNbtCompound();
@@ -242,14 +195,4 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
         int tileEntityType = 22;
         return new SUpdateTileEntityPacket(this.pos, tileEntityType, nbtTagCompound);
     }
-
-    //    @Override
-//    public CompoundNBT getUpdateTag()
-//    {
-//        CompoundNBT nbtTagCompound = new CompoundNBT();
-//        write(nbtTagCompound);
-//        System.out.println(world.isRemote);
-//        return nbtTagCompound;
-//        getUpdateTag()
-//    }
 }

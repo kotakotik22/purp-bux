@@ -19,22 +19,53 @@ public class Recipes extends RecipeProvider {
 
     @Override
     protected void registerRecipes(Consumer<IFinishedRecipe> consumer) {
+//        register(
+//                ShapedRecipeBuilder.shapedRecipe(ModBlocks.BUX_STATION.get())
+//                        .patternLine("rhr")
+//                        .patternLine("bed")
+//                        .patternLine("sgi")
+//                        .key('r', Items.REDSTONE)
+//                        .key('h', Items.HOPPER)
+//                        .key('b', Blocks.BREWING_STAND)
+//                        .key('e', Blocks.EMERALD_BLOCK)
+//                        .key('d', Blocks.DROPPER)
+//                        .key('s', Blocks.SUGAR_CANE)
+//                        .key('g', Blocks.REDSTONE_LAMP)
+//                        .key('i', Tags.Items.GEMS_DIAMOND)
+//                        .addCriterion("redstone", InventoryChangeTrigger.Instance.forItems(Items.REDSTONE)),
+//                consumer,
+//                "bux_station"
+//        );
+
         register(
                 ShapedRecipeBuilder.shapedRecipe(ModBlocks.BUX_STATION.get())
-                        .patternLine("rhr")
-                        .patternLine("bed")
-                        .patternLine("sgi")
-                        .key('r', Items.REDSTONE)
-                        .key('h', Items.HOPPER)
-                        .key('b', Blocks.BREWING_STAND)
-                        .key('e', Blocks.EMERALD_BLOCK)
-                        .key('d', Blocks.DROPPER)
-                        .key('s', Blocks.SUGAR_CANE)
-                        .key('g', Blocks.REDSTONE_LAMP)
-                        .key('i', Tags.Items.GEMS_DIAMOND)
+                        .patternLine("aba")
+                        .patternLine("cdc")
+                        .patternLine("eee")
+                        .key('a', Tags.Items.DUSTS_REDSTONE)
+                        .key('b', Blocks.HOPPER)
+                        .key('c', Blocks.DROPPER)
+                        .key('d', Blocks.EMERALD_BLOCK)
+                        .key('e', Tags.Items.GEMS_EMERALD)
                         .addCriterion("redstone", InventoryChangeTrigger.Instance.forItems(Items.REDSTONE)),
                 consumer,
                 "bux_station"
+        );
+
+        register(
+                ShapedRecipeBuilder.shapedRecipe(ModBlocks.EXP_EXTRACTOR.get())
+                        .patternLine("bab")
+                        .patternLine("ede")
+                        .patternLine("fcf")
+                        .key('a', Blocks.HOPPER)
+                        .key('b', Items.GLASS_BOTTLE)
+                        .key('c', Tags.Items.CHESTS)
+                        .key('d', Blocks.REDSTONE_BLOCK)
+                        .key('e', Blocks.DROPPER)
+                        .key('f', Tags.Items.INGOTS_IRON)
+                        .addCriterion("redstone", InventoryChangeTrigger.Instance.forItems(Items.REDSTONE)),
+                consumer,
+                "exp_extractor"
         );
 
         register(

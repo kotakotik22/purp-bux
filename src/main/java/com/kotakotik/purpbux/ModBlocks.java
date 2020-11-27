@@ -1,6 +1,7 @@
 package com.kotakotik.purpbux;
 
 import com.kotakotik.purpbux.blocks.BuxStation;
+import com.kotakotik.purpbux.blocks.ExpExtractor;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -11,6 +12,7 @@ import java.util.function.Supplier;
 
 public class ModBlocks {
     public static final RegistryObject<Block> BUX_STATION = register("bux_station", BuxStation::new);
+    public static final RegistryObject<Block> EXP_EXTRACTOR = register("exp_extractor", ExpExtractor::new);
 
 
     static void register() {

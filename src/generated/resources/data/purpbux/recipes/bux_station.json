@@ -1,34 +1,25 @@
 {
   "type": "minecraft:crafting_shaped",
   "pattern": [
-    "rhr",
-    "bed",
-    "sgi"
+    "aba",
+    "cdc",
+    "eee"
   ],
   "key": {
-    "r": {
-      "item": "minecraft:redstone"
-    },
-    "h": {
-      "item": "minecraft:hopper"
+    "a": {
+      "tag": "forge:dusts/redstone"
     },
     "b": {
-      "item": "minecraft:brewing_stand"
+      "item": "minecraft:hopper"
     },
-    "e": {
-      "item": "minecraft:emerald_block"
-    },
-    "d": {
+    "c": {
       "item": "minecraft:dropper"
     },
-    "s": {
-      "item": "minecraft:sugar_cane"
+    "d": {
+      "item": "minecraft:emerald_block"
     },
-    "g": {
-      "item": "minecraft:redstone_lamp"
-    },
-    "i": {
-      "tag": "forge:gems/diamond"
+    "e": {
+      "tag": "forge:gems/emerald"
     }
   },
   "result": {

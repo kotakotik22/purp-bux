@@ -1,4 +1,6 @@
 {
   "screen.purpbux.buxstation": "Бакс Станция",
-  "block.purpbux.bux_station": "Бакс Станция"
+  "block.purpbux.bux_station": "Бакс Станция",
+  "block.purpbux.exp_extractor": "Экстрактор Опыта",
+  "item.purpbux.exp_bottle": "Опыт в бутылке"
 }

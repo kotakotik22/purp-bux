@@ -1,11 +1,15 @@
 package com.kotakotik.purpbux.datagen;
 
+import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.Purpbux;
+import com.kotakotik.purpbux.Registration;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
-import net.minecraftforge.client.model.generators.ItemModelBuilder;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.client.model.generators.ModelFile;
 import net.minecraftforge.common.data.ExistingFileHelper;
+import net.minecraftforge.fml.RegistryObject;
 
 public class Models extends ItemModelProvider {
 
@@ -15,12 +19,12 @@ public class Models extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        withExistingParent("bux_station", modLoc("block/bux_station"));
+        singleTexture(ModItems.EXP_BOTTLE.get().getRegistryName().getPath(), new ResourceLocation("item/handheld"),
+                "layer0", new ResourceLocation(Purpbux.MODID, "item/exp_bottle"));
 
+        for (RegistryObject<Block> item : Registration.BLOCKS.getEntries()) {
+            withExistingParent(item.get().getRegistryName().getPath(), item.getId().toString().replaceFirst(":", ":block/"));
+        }
         ModelFile itemGenerated = getExistingFile(mcLoc("item/generated"));
-    }
-
-    private ItemModelBuilder builder(ModelFile itemGenerated, String name) {
-        return getBuilder(name).parent(itemGenerated).texture("layer0", "item/" + name);
     }
 }

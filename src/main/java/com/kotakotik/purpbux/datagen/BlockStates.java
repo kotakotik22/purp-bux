@@ -36,6 +36,17 @@ public class BlockStates extends BlockStateProvider {
                 return modelBuxStation;
             }
         });
+
+        ResourceLocation expGenerator = new ResourceLocation(Purpbux.MODID, "block/exp_extractor");
+
+        orientedBlock(ModBlocks.EXP_EXTRACTOR.get(), state -> models().cube("exp_extractor",
+                new ResourceLocation(Purpbux.MODID, "block/exp_extractor_bottom"),
+                new ResourceLocation(Purpbux.MODID, "block/exp_extractor_top"),
+                new ResourceLocation(Purpbux.MODID, "block/exp_extractor_front"),
+                expGenerator,
+                expGenerator,
+                expGenerator)
+                .texture("particle", expGenerator));
     }
 
     private void orientedBlock(Block block, Function<BlockState, ModelFile> modelFunc) {
