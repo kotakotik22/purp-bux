@@ -28,9 +28,9 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
     public int progress = 0;
     public int totalProgress = 20 * 5;
 
-    private final ItemStackHandler itemHandler = createHandler();
+    public final ItemStackHandler itemHandler = createHandler();
 
-    private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
     public BuxStationTile() {
         super(ModTiles.BUX_STATION_TILE.get());

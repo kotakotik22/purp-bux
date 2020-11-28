@@ -14,6 +14,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
@@ -110,5 +111,27 @@ public class BuxStation extends Block {
             }
         }
         return ActionResultType.SUCCESS;
+    }
+
+    @Override
+    public void onReplaced(BlockState state, World worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.isIn(newState.getBlock())) {
+            TileEntity tileentity = worldIn.getTileEntity(pos);
+            if (tileentity instanceof BuxStationTile) {
+                BuxStationTile tile = (BuxStationTile) tileentity;
+//                tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
+//                    for (int i = 0; i < h.getSlots(); i++) {
+//                        spawnAsEntity(worldIn, pos, h.getStackInSlot(i));
+//                        h
+//                    }
+//                });
+                for (int i = 0; i < tile.itemHandler.getSlots(); i++) {
+                    spawnAsEntity(worldIn, pos, tile.itemHandler.getStackInSlot(i));
+                    tile.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+                }
+            }
+
+            super.onReplaced(state, worldIn, pos, newState, isMoving);
+        }
     }
 }
