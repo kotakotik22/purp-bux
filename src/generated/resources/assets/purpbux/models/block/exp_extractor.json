@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "purpbux:block/exp_extractor_bottom",
+    "up": "purpbux:block/exp_extractor_top",
+    "north": "purpbux:block/exp_extractor_front",
+    "south": "purpbux:block/exp_extractor",
+    "east": "purpbux:block/exp_extractor",
+    "west": "purpbux:block/exp_extractor",
+    "particle": "purpbux:block/exp_extractor"
+  }
+}

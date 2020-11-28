@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "purpbux:block/exp_extractor",
+      "x": 90
+    },
+    "facing=up": {
+      "model": "purpbux:block/exp_extractor",
+      "x": -90
+    },
+    "facing=north": {
+      "model": "purpbux:block/exp_extractor"
+    },
+    "facing=south": {
+      "model": "purpbux:block/exp_extractor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "purpbux:block/exp_extractor",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "purpbux:block/exp_extractor",
+      "y": 90
+    }
+  }
+}

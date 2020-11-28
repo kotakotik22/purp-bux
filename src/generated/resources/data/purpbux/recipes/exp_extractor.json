@@ -1,0 +1,31 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "bab",
+    "ede",
+    "fcf"
+  ],
+  "key": {
+    "a": {
+      "item": "minecraft:hopper"
+    },
+    "b": {
+      "item": "minecraft:glass_bottle"
+    },
+    "c": {
+      "tag": "forge:chests"
+    },
+    "d": {
+      "item": "minecraft:redstone_block"
+    },
+    "e": {
+      "item": "minecraft:dropper"
+    },
+    "f": {
+      "tag": "forge:ingots/iron"
+    }
+  },
+  "result": {
+    "item": "purpbux:exp_extractor"
+  }
+}
