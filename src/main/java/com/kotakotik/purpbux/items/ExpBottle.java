@@ -1,9 +1,11 @@
 package com.kotakotik.purpbux.items;
 
+import com.kotakotik.purpbux.utils.PlayerUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.*;
 import net.minecraft.world.World;
@@ -18,9 +20,13 @@ public class ExpBottle extends Item {
     @Nonnull
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
-        System.out.println(worldIn.isRemote);
+//        System.out.println(worldIn.isRemote);
 
-        ((PlayerEntity) entityLiving).giveExperiencePoints(20);
+        if(!worldIn.isRemote) {
+            ((PlayerEntity) entityLiving).giveExperiencePoints(20);
+        }
+
+        PlayerUtils.giveOrDropItem((PlayerEntity) entityLiving, Items.GLASS_BOTTLE);
 
         return super.onItemUseFinish(stack, worldIn, entityLiving);
     }

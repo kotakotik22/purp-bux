@@ -64,7 +64,9 @@ public class ExpExtractor extends Block {
             ItemStack bottle = player.getHeldItem(hand);
             PlayerUtils.fillBottle(player, hand, bottle, new ItemStack(ModItems.EXP_BOTTLE.get()));
 
-            player.giveExperiencePoints(neededExp * -1);
+            if(!worldIn.isRemote) {
+                player.giveExperiencePoints(neededExp * -1);
+            }
         }
         return ActionResultType.CONSUME;
     }
