@@ -106,6 +106,7 @@ public class BuxStation extends Block {
         } else {
             if (player.equals(Minecraft.getInstance().player)) {
                 ClientStorage.BuxStationCurrentPos = pos;
+                ClientStorage.BuxStationProgress = 0;
             }
         }
         return ActionResultType.SUCCESS;

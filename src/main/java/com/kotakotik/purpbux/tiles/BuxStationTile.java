@@ -77,9 +77,9 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
         ItemStack paper = itemHandler.getStackInSlot(0);
         ItemStack exp_bottle = itemHandler.getStackInSlot(1);
         ItemStack out_bux = itemHandler.getStackInSlot(2);
-        if(!paper.isEmpty() && !exp_bottle.isEmpty()) {
+        if (!paper.isEmpty() && !exp_bottle.isEmpty() && out_bux.getCount() < 64) {
             progress++;
-            if(progress >= totalProgress) {
+            if (progress >= totalProgress) {
                 progress = 0;
                 ItemStack paper_copy = paper.copy();
                 ItemStack exp_bottle_copy = exp_bottle.copy();
