@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "exp_extractor",
+      "name": "block.purpbux.exp_extractor",
       "rolls": 1,
       "entries": [
         {

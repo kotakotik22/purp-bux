@@ -47,6 +47,8 @@ public class BlockStates extends BlockStateProvider {
                 expGenerator,
                 expGenerator)
                 .texture("particle", expGenerator));
+
+        orientedBlock(ModBlocks.BUX_PILE.get(), state -> new ModelFile.ExistingModelFile(new ResourceLocation(Purpbux.MODID, "block/bux_pile"), models().existingFileHelper));
     }
 
     private void orientedBlock(Block block, Function<BlockState, ModelFile> modelFunc) {

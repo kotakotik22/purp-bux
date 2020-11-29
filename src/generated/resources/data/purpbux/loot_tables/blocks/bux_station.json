@@ -2,7 +2,7 @@
   "type": "minecraft:block",
   "pools": [
     {
-      "name": "bux_station",
+      "name": "block.purpbux.bux_station",
       "rolls": 1,
       "entries": [
         {

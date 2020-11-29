@@ -1,6 +1,7 @@
 package com.kotakotik.purpbux.datagen;
 
 import com.kotakotik.purpbux.ModBlocks;
+import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.Purpbux;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
@@ -70,10 +71,23 @@ public class Recipes extends RecipeProvider {
 
         register(
                 ShapelessRecipeBuilder.shapelessRecipe(Blocks.CHEST)
-                    .addIngredient(Ingredient.fromTag(Tags.Items.CHESTS))
-                    .addCriterion("wood", hasItem(Tags.Items.CHESTS)),
+                        .addIngredient(Ingredient.fromTag(Tags.Items.CHESTS))
+                        .addCriterion("wood", hasItem(Tags.Items.CHESTS)),
                 consumer,
                 "chest_to_vanilla"
+        );
+
+        register(ShapelessRecipeBuilder.shapelessRecipe(ModBlocks.BUX_PILE.get())
+                        .addIngredient(ModItems.PURP_BUX.get(), 9)
+                        .addCriterion("bux", InventoryChangeTrigger.Instance.forItems(ModItems.PURP_BUX.get())),
+                consumer,
+                "bux_pile");
+
+        register(ShapelessRecipeBuilder.shapelessRecipe(ModItems.PURP_BUX.get(), 9)
+                        .addIngredient(ModBlocks.BUX_PILE.get())
+                        .addCriterion("bux", InventoryChangeTrigger.Instance.forItems(ModItems.PURP_BUX.get())),
+                consumer,
+                "bux"
         );
     }
 

@@ -1,7 +1,9 @@
 package com.kotakotik.purpbux.datagen;
 
 import com.kotakotik.purpbux.ModBlocks;
+import net.minecraft.block.Block;
 import net.minecraft.data.DataGenerator;
+import net.minecraftforge.fml.RegistryObject;
 
 public class LootTables extends BaseLootTableProvider {
 
@@ -11,7 +13,16 @@ public class LootTables extends BaseLootTableProvider {
 
     @Override
     protected void addTables() {
-        lootTables.put(ModBlocks.BUX_STATION.get(), createStandardTable("bux_station", ModBlocks.BUX_STATION.get()));
-        lootTables.put(ModBlocks.EXP_EXTRACTOR.get(), createStandardTable("exp_extractor", ModBlocks.EXP_EXTRACTOR.get()));
+        basicTable(ModBlocks.BUX_PILE);
+        basicTable(ModBlocks.BUX_STATION);
+        basicTable(ModBlocks.EXP_EXTRACTOR);
+    }
+
+    private void basicTable(Block block) {
+        lootTables.put(block, createStandardTable(block.asItem().getName().getString(), block));
+    }
+
+    private void basicTable(RegistryObject<Block> block) {
+        basicTable(block.get());
     }
 }
