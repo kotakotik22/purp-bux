@@ -1,6 +1,8 @@
 {
-  "screen.purpbux.buxstation": "Bux Station",
-  "block.purpbux.bux_station": "Bux Station",
+  "screen.purpbux.buxstation": "Bux station",
+  "block.purpbux.bux_station": "Bux station",
   "block.purpbux.exp_extractor": "Experience extractor",
-  "item.purpbux.exp_bottle": "Bottled experience"
+  "block.purpbux.bux_pile": "Bux pile",
+  "item.purpbux.exp_bottle": "Bottled experience",
+  "item.purpbux.purp_bux": "Purp bux"
 }
