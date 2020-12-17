@@ -2,7 +2,6 @@ package com.kotakotik.purpbux.blocks;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.IWaterLoggable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
@@ -22,7 +21,7 @@ import net.minecraft.world.IWorldReader;
 import javax.annotation.Nonnull;
 import java.util.Random;
 
-public class BuxPile extends Block implements IWaterLoggable {
+public class BuxPile extends Block {
     private static final DirectionProperty FACING = BlockStateProperties.FACING;
 
     private static final VoxelShape SHAPE_N = Block.makeCuboidShape(0, 0, 3, 16, 6, 13);
