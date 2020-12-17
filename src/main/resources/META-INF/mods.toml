@@ -17,21 +17,21 @@ issueTrackerURL="http://my.issue.tracker/" #optional
 # The modid of the mod
 modId="purpbux" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
-version="${file.jarVersion}" #mandatory
+version = "${file.jarVersion}" #mandatory
 # A display name for the mod
-displayName="PurpBux" #mandatory
+displayName = "PurpBux" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification <here>
 #updateJSONURL="http://myurl.me/" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL="https://kotakotik.com/" #optional
+displayURL = "https://kotakotik.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
-credits="Thanks for this example mod goes to Java" #optional
+credits = "Thanks to the library mod Bookshelf" #optional
 # A text field displayed in the mod UI
-authors="kotakotik22" #optional
+authors = "kotakotik22" #optional
 # The description text for the mod (multi line!) (#mandatory)
-description='''
+description = '''
 A mod that adds money to the game, based on sveltebux
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
@@ -52,5 +52,12 @@ modId = "minecraft"
 mandatory = true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
 versionRange = "[1.16.4,1.17)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.purpbux]]
+modId = "bookshelf"
+mandatory = true
+versionRange = "[9.3.18,)"
 ordering = "NONE"
 side = "BOTH"

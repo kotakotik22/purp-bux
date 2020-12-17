@@ -107,6 +107,9 @@ dependencies {
     // compile 'com.mod-buildcraft:buildcraft:6.0.8:dev'  // adds buildcraft to the dev env
     // compile 'com.googlecode.efficient-java-matrix-library:ejml:0.24' // adds ejml to the dev env
 
+//    compile "net.darkhax.bookshelf:Bookshelf-1.16.4:${bookshelf_v}"
+    compile fg.deobf("net.darkhax.bookshelf:Bookshelf-1.16.4:${bookshelf_v}")
+
     // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
     // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
@@ -117,6 +120,10 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+}
+
+repositories {
+    maven { url 'https://maven.mcmoddev.com' }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

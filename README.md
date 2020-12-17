@@ -5,6 +5,8 @@ experience and paper in the Purp Bux Station
 
 ###### This mod is basically a new version of the Svelte Bux which I made for a server
 
+This mod uses the [Bookshelf](https://www.curseforge.com/minecraft/mc-mods/bookshelf) library
+
 ### Types of releases
 
 #### 1. Release

@@ -3,6 +3,7 @@ package com.kotakotik.purpbux.tiles;
 import com.kotakotik.purpbux.ClientStorage;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.ModTiles;
+import net.darkhax.bookshelf.block.tileentity.TileEntityBasicTickable;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -10,10 +11,7 @@ import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SUpdateTileEntityPacket;
 import net.minecraft.state.properties.BlockStateProperties;
-import net.minecraft.tileentity.ITickableTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
-import net.minecraft.util.IIntArray;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.LazyOptional;
@@ -24,7 +22,7 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class BuxStationTile extends TileEntity implements ITickableTileEntity {
+public class BuxStationTile extends TileEntityBasicTickable {
     public int progress = 0;
     public int totalProgress = 20 * 5;
 
@@ -36,32 +34,6 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
         super(ModTiles.BUX_STATION_TILE.get());
     }
 
-    public final IIntArray stationData = new IIntArray() {
-        public int get(int index) {
-            switch (index) {
-                case 0:
-                    return BuxStationTile.this.progress;
-                case 1:
-                    return BuxStationTile.this.totalProgress;
-                default:
-                    return 0;
-            }
-        }
-
-        public void set(int index, int value) {
-            switch(index) {
-                case 0:
-                    BuxStationTile.this.progress = value;
-                case 1:
-                    BuxStationTile.this.totalProgress = value;
-            }
-        }
-
-        public int size() {
-            return 2;
-        }
-    };
-
     void setWorking(boolean working) {
         BlockState blockState = world.getBlockState(pos);
         world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, working),
@@ -69,10 +41,8 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
     }
 
     @Override
-    public void tick() {
-        if(!this.hasWorld()) return;
-        if(world.isRemote) return; // stfu it definitely has world because i make sure it does above
-        // why cant i just do if(world == null) return
+    public void onTileTick() {
+        if (world.isRemote) return;
 
         ItemStack paper = itemHandler.getStackInSlot(0);
         ItemStack exp_bottle = itemHandler.getStackInSlot(1);
@@ -96,15 +66,15 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
                 itemHandler.setStackInSlot(2, out_bux_copy);
             }
             setWorking(true);
-            world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
             markDirty();
+            sync(false);
         }  else {
             setWorking(false);
 
             if(progress != 0) {
                 markDirty();
                 progress = 0;
-                world.notifyBlockUpdate(pos, getBlockState(), getBlockState(), 2);
+                sync(false);
             }
         }
     }
@@ -113,24 +83,6 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
     public void remove() {
         super.remove();
         handler.invalidate();
-    }
-
-    @Override
-    public void read(BlockState state, CompoundNBT tag) {
-        itemHandler.deserializeNBT(tag.getCompound("inv"));
-        totalProgress = tag.getInt("totalProgress");
-        progress = tag.getInt("progress");
-
-        super.read(state, tag);
-    }
-
-    @Override
-    public CompoundNBT write(CompoundNBT tag) {
-        tag.put("inv", itemHandler.serializeNBT());
-
-        tag.putInt("progress", progress);
-        tag.putInt("totalProgress", totalProgress);
-        return super.write(tag);
     }
 
     private ItemStackHandler createHandler() {
@@ -175,6 +127,42 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
         return super.getCapability(cap, side);
     }
 
+//    @Override
+//    public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
+//        BlockState blockState = world.getBlockState(pos);
+//        read(blockState, pkt.getNbtCompound());
+//        if (ClientStorage.BuxStationCurrentPos != null) {
+//            if (ClientStorage.BuxStationCurrentPos.equals(pos)) {
+//                CompoundNBT nbt = pkt.getNbtCompound();
+//                ClientStorage.BuxStationProgress = nbt.getInt("progress");
+//                ClientStorage.BuxStationTotalProgress = nbt.getInt("totalProgress");
+//            }
+//        }
+//    }
+
+    @Override
+    public void serialize(CompoundNBT tag) {
+        tag.put("inv", itemHandler.serializeNBT());
+
+        tag.putInt("progress", progress);
+        tag.putInt("totalProgress", totalProgress);
+    }
+
+    @Override
+    public void deserialize(CompoundNBT tag) {
+        itemHandler.deserializeNBT(tag.getCompound("inv"));
+        totalProgress = tag.getInt("totalProgress");
+        progress = tag.getInt("progress");
+    }
+
+    @Override
+    public SUpdateTileEntityPacket getUpdatePacket() {
+        CompoundNBT nbtTagCompound = new CompoundNBT();
+        write(nbtTagCompound);
+        int tileEntityType = 22;
+        return new SUpdateTileEntityPacket(this.pos, tileEntityType, nbtTagCompound);
+    }
+
     @Override
     public void onDataPacket(NetworkManager net, SUpdateTileEntityPacket pkt) {
         BlockState blockState = world.getBlockState(pos);
@@ -186,13 +174,5 @@ public class BuxStationTile extends TileEntity implements ITickableTileEntity {
                 ClientStorage.BuxStationTotalProgress = nbt.getInt("totalProgress");
             }
         }
-    }
-
-    @Override
-    public SUpdateTileEntityPacket getUpdatePacket() {
-        CompoundNBT nbtTagCompound = new CompoundNBT();
-        write(nbtTagCompound);
-        int tileEntityType = 22;
-        return new SUpdateTileEntityPacket(this.pos, tileEntityType, nbtTagCompound);
     }
 }
