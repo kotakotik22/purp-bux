@@ -1,5 +1,7 @@
 # Purp Bux
 
+![showcase](https://github.com/kotakotik22/purp-bux/blob/latest/showcase.png?raw=true)
+
 A mod that adds money to the game! The money can be made by combining
 experience and paper in the Purp Bux Station
 
