@@ -23,7 +23,7 @@ The pre-release is for almost production ready versions that still need a bit of
 
 The dev release is for very unstable versions. These are added almost every commit.
 
-###### This type of release might get removed when the repo becomes public
+###### This type of release is no longer used. If you want to play early, you have to compile the mod yourself.
 
 Just a warning (I guess): I'm not working on this mod seriously, I
 am working on it more seriously than other mods, but I will
