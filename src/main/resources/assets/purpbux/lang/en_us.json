@@ -4,5 +4,10 @@
   "block.purpbux.exp_extractor": "Experience extractor",
   "block.purpbux.bux_pile": "Bux pile",
   "item.purpbux.exp_bottle": "Bottled experience",
-  "item.purpbux.purp_bux": "Purp bux"
+  "item.purpbux.purp_bux": "Purp bux",
+  "item.purpbux.wallet": "Purp bux wallet",
+  "itemGroup.purpbux": "PurpBux",
+  "message.purpbux_wallet": "Current Bux count: %s",
+  "message.purpbux_wallet_remove": "To remove, shift-right click",
+  "message.purpbux_wallet_add": "To add, right click"
 }

@@ -27,7 +27,7 @@ displayURL = "https://kotakotik.com/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="examplemod.png" #optional
 # A text field displayed in the mod UI
-credits = "Thanks to the library mod Bookshelf" #optional
+credits = "Thanks to the library mod Bookshelf, also Husker for translating a bunch of this stuff to Russian" #optional
 # A text field displayed in the mod UI
 authors = "kotakotik22" #optional
 # The description text for the mod (multi line!) (#mandatory)

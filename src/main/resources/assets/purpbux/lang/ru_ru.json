@@ -4,5 +4,10 @@
   "block.purpbux.exp_extractor": "Экстрактор опыта",
   "block.purpbux.bux_pile": "Куча баксо",
   "item.purpbux.exp_bottle": "Опыт в бутылке",
-  "item.purpbux.purp_bux": "Фиол бакс"
+  "item.purpbux.purp_bux": "Фиол бакс",
+  "item.purpbux.wallet": "Кошелёк с баксами",
+  "itemGroup.purpbux": "ФиолБакс",
+  "message.purpbux_wallet": "Текущее количество Баксов: %s",
+  "message.purpbux_wallet_remove": "Чтобы убрать, присядте и нажмите ПКМ",
+  "message.purpbux_wallet_add": "Чтобы добавить, нажмите ПКМ"
 }
