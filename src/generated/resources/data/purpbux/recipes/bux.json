@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "purpbux:bux_pile"
+    }
+  ],
+  "result": {
+    "item": "purpbux:purp_bux",
+    "count": 9
+  }
+}

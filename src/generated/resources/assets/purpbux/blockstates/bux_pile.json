@@ -1,0 +1,27 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "purpbux:block/bux_pile",
+      "x": 90
+    },
+    "facing=up": {
+      "model": "purpbux:block/bux_pile",
+      "x": -90
+    },
+    "facing=north": {
+      "model": "purpbux:block/bux_pile"
+    },
+    "facing=south": {
+      "model": "purpbux:block/bux_pile",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "purpbux:block/bux_pile",
+      "y": 270
+    },
+    "facing=east": {
+      "model": "purpbux:block/bux_pile",
+      "y": 90
+    }
+  }
+}

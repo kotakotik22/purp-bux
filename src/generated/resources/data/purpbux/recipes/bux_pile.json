@@ -1,0 +1,35 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "purpbux:purp_bux"
+    },
+    {
+      "item": "purpbux:purp_bux"
+    },
+    {
+      "item": "purpbux:purp_bux"
+    },
+    {
+      "item": "purpbux:purp_bux"
+    },
+    {
+      "item": "purpbux:purp_bux"
+    },
+    {
+      "item": "purpbux:purp_bux"
+    },
+    {
+      "item": "purpbux:purp_bux"
+    },
+    {
+      "item": "purpbux:purp_bux"
+    },
+    {
+      "item": "purpbux:purp_bux"
+    }
+  ],
+  "result": {
+    "item": "purpbux:bux_pile"
+  }
+}
