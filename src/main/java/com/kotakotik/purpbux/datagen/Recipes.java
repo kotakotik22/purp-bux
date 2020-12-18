@@ -89,6 +89,17 @@ public class Recipes extends RecipeProvider {
                 consumer,
                 "bux"
         );
+
+        register(ShapedRecipeBuilder.shapedRecipe(ModItems.WALLET.get(), 1)
+                        .addCriterion("leather", InventoryChangeTrigger.Instance.forItems(Items.LEATHER))
+                        .patternLine("x x")
+                        .patternLine("xox")
+                        .patternLine("xxx")
+                        .key('x', Items.LEATHER)
+                        .key('o', ModItems.PURP_BUX.get()),
+                consumer,
+                "wallet"
+        );
     }
 
     private void register(ShapelessRecipeBuilder recipeBuilder, Consumer<IFinishedRecipe> consumer, String name) {

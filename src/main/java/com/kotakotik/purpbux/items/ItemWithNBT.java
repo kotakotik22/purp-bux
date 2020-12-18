@@ -13,11 +13,11 @@ public abstract class ItemWithNBT extends Item {
 
     @Override
     public void onCreated(ItemStack stack, World worldIn, PlayerEntity playerIn) {
-        CompoundNBT nbt = stack.getTag();
-        addNBT(nbt);
-        stack.setTag(nbt);
         super.onCreated(stack, worldIn, playerIn);
+        CompoundNBT nbt = stack.getTag();
+        addDefaultNBT(nbt);
+        stack.setTag(nbt);
     }
 
-    abstract void addNBT(CompoundNBT nbt);
+    abstract void addDefaultNBT(CompoundNBT nbt);
 }

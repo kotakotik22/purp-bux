@@ -26,8 +26,7 @@ public class Wallet extends ItemWithNBT {
     }
 
     @Override
-    void addNBT(CompoundNBT nbt) {
-        nbt.putInt("storedBux", 0);
+    void addDefaultNBT(CompoundNBT nbt) {
     }
 
     @Override
