@@ -110,6 +110,9 @@ dependencies {
 //    compile "net.darkhax.bookshelf:Bookshelf-1.16.4:${bookshelf_v}"
     compile fg.deobf("net.darkhax.bookshelf:Bookshelf-1.16.4:${bookshelf_v}")
 
+    compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${top_version}:api")
+    runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${top_version}")
+
     // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
     // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
@@ -123,7 +126,18 @@ dependencies {
 }
 
 repositories {
-    maven { url 'https://maven.mcmoddev.com' }
+    maven { // Bookshelf
+        url 'https://maven.mcmoddev.com'
+    }
+    maven { // TOP
+
+        name 'tterrag maven'
+
+        url "http://maven.tterrag.com/"
+
+    }
+
+
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..

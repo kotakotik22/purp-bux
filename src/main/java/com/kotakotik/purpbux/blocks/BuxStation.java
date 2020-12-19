@@ -37,6 +37,7 @@ import javax.annotation.Nullable;
 public class BuxStation extends Block {
     private static final DirectionProperty FACING = BlockStateProperties.FACING;
     private static final BooleanProperty POWERED = BlockStateProperties.POWERED;
+    private BuxStationTile tileEntity;
 
     public BuxStation() {
         super(Block.Properties
@@ -50,6 +51,10 @@ public class BuxStation extends Block {
         );
     }
 
+    public BuxStationTile getTileEntity() {
+        return tileEntity;
+    }
+
     @Override
     public boolean hasTileEntity(BlockState state) {
         return true;
@@ -58,7 +63,7 @@ public class BuxStation extends Block {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        return new BuxStationTile();
+        return this.tileEntity = new BuxStationTile();
     }
 
     @Override
@@ -134,4 +139,6 @@ public class BuxStation extends Block {
             super.onReplaced(state, worldIn, pos, newState, isMoving);
         }
     }
+
+
 }

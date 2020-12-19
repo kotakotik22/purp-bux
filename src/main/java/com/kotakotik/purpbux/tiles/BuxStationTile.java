@@ -26,6 +26,14 @@ public class BuxStationTile extends TileEntityBasicTickable {
     public int progress = 0;
     public int totalProgress = 20 * 5;
 
+    public int getProgress() {
+        return progress;
+    }
+
+    public int getTotalProgress() {
+        return totalProgress;
+    }
+
     public final ItemStackHandler itemHandler = createHandler();
 
     public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
@@ -37,11 +45,19 @@ public class BuxStationTile extends TileEntityBasicTickable {
     void setWorking(boolean working) {
         BlockState blockState = world.getBlockState(pos);
         world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, working),
-                    Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
+                Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
+    }
+
+    public int getProgressPercentage() {
+        if (progress == 0 || totalProgress == 0) {
+            return 0;
+        }
+        return (int) ((float) progress / totalProgress * 100);
     }
 
     @Override
     public void onTileTick() {
+        assert world != null;
         if (world.isRemote) return;
 
         ItemStack paper = itemHandler.getStackInSlot(0);

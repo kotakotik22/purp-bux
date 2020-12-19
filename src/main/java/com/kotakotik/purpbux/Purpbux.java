@@ -33,7 +33,6 @@ public class Purpbux
     public static final String MODID = "purpbux";
 
     public Purpbux() {
-        Registration.register();
 
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
@@ -46,6 +45,9 @@ public class Purpbux
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        Registration.register();
+
     }
 
     private void setup(final FMLCommonSetupEvent event)
