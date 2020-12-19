@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "x x",
+    "xox",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:emerald_block"
+    },
+    "o": {
+      "item": "purpbux:walletmk3"
+    }
+  },
+  "result": {
+    "item": "purpbux:walletmk4"
+  }
+}

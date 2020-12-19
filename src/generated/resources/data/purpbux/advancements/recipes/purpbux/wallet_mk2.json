@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "purpbux:wallet_mk2"
+    ]
+  },
+  "criteria": {
+    "wallet_mk2_criterion": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "minecraft:iron_ingot"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "purpbux:wallet_mk2"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "wallet_mk2_criterion",
+      "has_the_recipe"
+    ]
+  ]
+}

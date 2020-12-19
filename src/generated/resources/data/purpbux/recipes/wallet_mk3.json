@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "x x",
+    "xox",
+    "xxx"
+  ],
+  "key": {
+    "x": {
+      "item": "minecraft:diamond"
+    },
+    "o": {
+      "item": "purpbux:walletmk2"
+    }
+  },
+  "result": {
+    "item": "purpbux:walletmk3"
+  }
+}
