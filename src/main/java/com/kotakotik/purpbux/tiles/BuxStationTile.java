@@ -5,6 +5,7 @@ import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.ModTiles;
 import net.darkhax.bookshelf.block.tileentity.TileEntityBasicTickable;
 import net.minecraft.block.BlockState;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
@@ -21,6 +22,8 @@ import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.Iterator;
 
 public class BuxStationTile extends TileEntityBasicTickable {
     public int progress = 0;
@@ -35,15 +38,23 @@ public class BuxStationTile extends TileEntityBasicTickable {
         return totalProgress;
     }
 
-    public final ItemStackHandler itemHandler = createHandler();
+    public final ItemStackHandler itemInputHandler = createHandler(Items.PAPER, ModItems.EXP_BOTTLE.get());
+    /*
+         0: paper
+         1: exp bottle
+     */
+//    public final ItemStackHandler itemExpHandler = createHandler(ModItems.EXP_BOTTLE.get());
+    public final ItemStackHandler itemBuxHandler = createHandler(false, ModItems.PURP_BUX.get());
 
-    public final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
+    public final LazyOptional<IItemHandler> inputHandler = LazyOptional.of(() -> itemInputHandler);
+    public final LazyOptional<IItemHandler> buxHandler = LazyOptional.of(() -> itemBuxHandler);
 
     public BuxStationTile() {
         super(ModTiles.BUX_STATION_TILE.get());
     }
 
     void setWorking(boolean working) {
+        assert world != null;
         BlockState blockState = world.getBlockState(pos);
         world.setBlockState(pos, blockState.with(BlockStateProperties.POWERED, working),
                 Constants.BlockFlags.NOTIFY_NEIGHBORS + Constants.BlockFlags.BLOCK_UPDATE);
@@ -61,9 +72,9 @@ public class BuxStationTile extends TileEntityBasicTickable {
         assert world != null;
         if (world.isRemote) return;
 
-        ItemStack paper = itemHandler.getStackInSlot(0);
-        ItemStack exp_bottle = itemHandler.getStackInSlot(1);
-        ItemStack out_bux = itemHandler.getStackInSlot(2);
+        ItemStack paper = itemInputHandler.getStackInSlot(0);
+        ItemStack exp_bottle = itemInputHandler.getStackInSlot(1);
+        ItemStack out_bux = itemBuxHandler.getStackInSlot(0);
         if (!paper.isEmpty() && !exp_bottle.isEmpty() && out_bux.getCount() < 64) {
             progress++;
             if (progress >= totalProgress) {
@@ -72,15 +83,15 @@ public class BuxStationTile extends TileEntityBasicTickable {
                 ItemStack exp_bottle_copy = exp_bottle.copy();
                 paper_copy.setCount(paper.getCount() - 1);
                 exp_bottle_copy.setCount(exp_bottle.getCount() - 1);
-                itemHandler.setStackInSlot(0, paper_copy);
-                itemHandler.setStackInSlot(1, exp_bottle_copy);
+                itemInputHandler.setStackInSlot(0, paper_copy);
+                itemInputHandler.setStackInSlot(1, exp_bottle_copy);
                 ItemStack out_bux_copy = out_bux.copy();
-                if(out_bux_copy.isEmpty()) {
+                if (out_bux_copy.isEmpty()) {
                     out_bux_copy = new ItemStack(ModItems.PURP_BUX.get());
                 } else {
                     out_bux_copy.setCount(out_bux.getCount() + 1);
                 }
-                itemHandler.setStackInSlot(2, out_bux_copy);
+                itemBuxHandler.setStackInSlot(0, out_bux_copy);
             }
             setWorking(true);
             markDirty();
@@ -99,16 +110,24 @@ public class BuxStationTile extends TileEntityBasicTickable {
     @Override
     public void remove() {
         super.remove();
-        handler.invalidate();
+        buxHandler.invalidate();
+        inputHandler.invalidate();
     }
 
-    private ItemStackHandler createHandler() {
-        return new ItemStackHandler(3) {
+    private ItemStackHandler createHandler(boolean allowInput, Item... items) {
+        return new ItemStackHandler(items.length) {
             private boolean checkIfOk(int slot, ItemStack stack) {
-                if(slot == 0) {
-                    return stack.getItem() == Items.PAPER;
-                } else if(slot == 1) {
-                    return stack.getItem() == ModItems.EXP_BOTTLE.get();
+//                return stack.getItem().equals(item);
+//                .filter((item) -> {
+//                    return item.equals(stack.getItem());
+//                });
+                int i = 0;
+                for (Iterator<Item> it = Arrays.stream(items).iterator(); it.hasNext(); ) {
+                    Item item = it.next();
+                    if (slot == i && stack.getItem() == item) {
+                        return true;
+                    }
+                    i++;
                 }
                 return false;
             }
@@ -126,7 +145,7 @@ public class BuxStationTile extends TileEntityBasicTickable {
             @Nonnull
             @Override
             public ItemStack insertItem(int slot, @Nonnull ItemStack stack, boolean simulate) {
-                if(!checkIfOk(slot, stack)) {
+                if (!checkIfOk(slot, stack) || !allowInput) {
                     return stack;
                 }
                 return super.insertItem(slot, stack, simulate);
@@ -134,12 +153,24 @@ public class BuxStationTile extends TileEntityBasicTickable {
         };
     }
 
+    private ItemStackHandler createHandler(Item... items) {
+        return createHandler(true, items);
+    }
+
+    public final ItemStackHandler[] handlers = new ItemStackHandler[]{
+            itemBuxHandler,
+            itemInputHandler,
+    };
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY && side != Direction.DOWN /* Completely disables hopper output, TODO: enable station hopper output and make it only extract bux */) {
-            return handler.cast();
+        if (cap == CapabilityItemHandler.ITEM_HANDLER_CAPABILITY) {
+            if (side == Direction.DOWN) {
+                return buxHandler.cast();
+            }
+            return inputHandler.cast();
+
         }
         return super.getCapability(cap, side);
     }
@@ -159,7 +190,8 @@ public class BuxStationTile extends TileEntityBasicTickable {
 
     @Override
     public void serialize(CompoundNBT tag) {
-        tag.put("inv", itemHandler.serializeNBT());
+        tag.put("inputInv", itemInputHandler.serializeNBT());
+        tag.put("buxInv", itemBuxHandler.serializeNBT());
 
         tag.putInt("progress", progress);
         tag.putInt("totalProgress", totalProgress);
@@ -167,7 +199,9 @@ public class BuxStationTile extends TileEntityBasicTickable {
 
     @Override
     public void deserialize(CompoundNBT tag) {
-        itemHandler.deserializeNBT(tag.getCompound("inv"));
+        itemInputHandler.deserializeNBT(tag.getCompound("inputInv"));
+        itemBuxHandler.deserializeNBT(tag.getCompound("buxInv"));
+
         totalProgress = tag.getInt("totalProgress");
         progress = tag.getInt("progress");
     }

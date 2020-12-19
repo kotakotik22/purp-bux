@@ -10,6 +10,7 @@ import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.IWorldPosCallable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -36,11 +37,11 @@ public class BuxStationContainer extends Container {
             tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
                 SlotItemHandler slotItemHandler0 = new SlotItemHandler(h, 0, 56, 17);
                 addSlot(slotItemHandler0);
-
                 SlotItemHandler slotItemHandler1 = new SlotItemHandler(h, 1, 56, 53);
                 addSlot(slotItemHandler1);
-
-                SlotItemHandler slotItemHandler2 = new SlotItemHandler(h, 2, 116, 35);
+            });
+            tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, Direction.DOWN).ifPresent(h -> {
+                SlotItemHandler slotItemHandler2 = new SlotItemHandler(h, 0, 116, 35);
                 addSlot(slotItemHandler2);
             });
         }

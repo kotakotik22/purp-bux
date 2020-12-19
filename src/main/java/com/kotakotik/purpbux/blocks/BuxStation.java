@@ -32,6 +32,7 @@ import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
+import net.minecraftforge.items.ItemStackHandler;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -132,9 +133,11 @@ public class BuxStation extends Block {
 //                        h
 //                    }
 //                });
-                for (int i = 0; i < tile.itemHandler.getSlots(); i++) {
-                    spawnAsEntity(worldIn, pos, tile.itemHandler.getStackInSlot(i));
-                    tile.itemHandler.setStackInSlot(i, ItemStack.EMPTY);
+                ItemStackHandler[] handlers = tile.handlers;
+                for (int i = 0; i < handlers.length; i++) {
+                    ItemStackHandler handler = handlers[i];
+                    spawnAsEntity(worldIn, pos, handler.getStackInSlot(i));
+                    handler.setStackInSlot(0, ItemStack.EMPTY);
                 }
             }
 
