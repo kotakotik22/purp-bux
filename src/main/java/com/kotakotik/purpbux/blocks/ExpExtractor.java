@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
@@ -19,7 +20,13 @@ import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ExpExtractor extends Block {
     private static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -64,10 +71,15 @@ public class ExpExtractor extends Block {
             ItemStack bottle = player.getHeldItem(hand);
             PlayerUtils.fillBottle(player, hand, bottle, new ItemStack(ModItems.EXP_BOTTLE.get()));
 
-            if(!worldIn.isRemote) {
+            if (!worldIn.isRemote) {
                 player.giveExperiencePoints(neededExp * -1);
             }
         }
         return ActionResultType.CONSUME;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
+        list.add(new TranslationTextComponent("message.purpbux_exp_extractor", neededExp));
     }
 }

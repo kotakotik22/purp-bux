@@ -1,6 +1,7 @@
 package com.kotakotik.purpbux.items;
 
 import com.kotakotik.purpbux.utils.PlayerUtils;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -8,22 +9,28 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.*;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.List;
 
 public class ExpBottle extends Item {
     public ExpBottle(Properties properties) {
         super(properties);
     }
 
+    public static final int expToGive = 20;
+
     @Nonnull
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 //        System.out.println(worldIn.isRemote);
 
-        if(!worldIn.isRemote) {
-            ((PlayerEntity) entityLiving).giveExperiencePoints(20);
+        if (!worldIn.isRemote) {
+            ((PlayerEntity) entityLiving).giveExperiencePoints(expToGive);
         }
 
         PlayerUtils.giveOrDropItem((PlayerEntity) entityLiving, Items.GLASS_BOTTLE);
@@ -50,5 +57,10 @@ public class ExpBottle extends Item {
 
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
         return DrinkHelper.startDrinking(worldIn, playerIn, handIn);
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
+        list.add(new TranslationTextComponent("message.purpbux_exp_bottle", expToGive));
     }
 }

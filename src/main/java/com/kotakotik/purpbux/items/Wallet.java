@@ -55,6 +55,7 @@ public class Wallet extends ItemWithNBT {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
+        list.add(ttc("message.purpbux_wallet_info", maxBux));
         list.add(ttc("message.purpbux_wallet", getStoredBux(stack)));
         list.add(ttc("message.purpbux_wallet_add"));
         list.add(ttc("message.purpbux_wallet_remove"));

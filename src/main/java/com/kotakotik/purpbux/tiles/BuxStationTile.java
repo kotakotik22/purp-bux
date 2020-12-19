@@ -24,7 +24,8 @@ import javax.annotation.Nullable;
 
 public class BuxStationTile extends TileEntityBasicTickable {
     public int progress = 0;
-    public int totalProgress = 20 * 5;
+    public int totalProgress = totalProgressGlobal;
+    public static final int totalProgressGlobal = 20 * 5;
 
     public int getProgress() {
         return progress;

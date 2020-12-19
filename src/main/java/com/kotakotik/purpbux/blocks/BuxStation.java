@@ -8,6 +8,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -33,6 +34,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.List;
 
 public class BuxStation extends Block {
     private static final DirectionProperty FACING = BlockStateProperties.FACING;
@@ -140,5 +142,8 @@ public class BuxStation extends Block {
         }
     }
 
-
+    @Override
+    public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
+        list.add(new TranslationTextComponent("message.purpbux_station", BuxStationTile.totalProgressGlobal / 20));
+    }
 }
