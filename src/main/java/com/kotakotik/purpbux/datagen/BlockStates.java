@@ -2,6 +2,7 @@ package com.kotakotik.purpbux.datagen;
 
 import com.kotakotik.purpbux.ModBlocks;
 import com.kotakotik.purpbux.Purpbux;
+import com.kotakotik.purpbux.blocks.SveltebuxGravestone;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.data.DataGenerator;
@@ -49,6 +50,14 @@ public class BlockStates extends BlockStateProvider {
                 .texture("particle", expGenerator));
 
         orientedBlock(ModBlocks.BUX_PILE.get(), state -> new ModelFile.ExistingModelFile(new ResourceLocation(Purpbux.MODID, "block/bux_pile"), models().existingFileHelper));
+        orientedBlock(ModBlocks.SVELTEBUX_GRAVESTONE.get(), state -> {
+            if (state.get(SveltebuxGravestone.HAS_FLOWER)) {
+                return new ModelFile.ExistingModelFile(new ResourceLocation(Purpbux.MODID, "block/sveltebux_gravestone_flower"), models().existingFileHelper);
+
+            }
+            return new ModelFile.ExistingModelFile(new ResourceLocation(Purpbux.MODID, "block/sveltebux_gravestone"), models().existingFileHelper);
+        });
+
     }
 
     private void orientedBlock(Block block, Function<BlockState, ModelFile> modelFunc) {

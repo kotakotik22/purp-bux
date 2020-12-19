@@ -92,16 +92,19 @@ public class Recipes extends RecipeProvider {
                 "bux"
         );
 
-//        register(ShapedRecipeBuilder.shapedRecipe(ModItems.WALLET.get(), 1)
-//                        .addCriterion("leather", InventoryChangeTrigger.Instance.forItems(Items.LEATHER))
-//                        .patternLine("x x")
-//                        .patternLine("xox")
-//                        .patternLine("xxx")
-//                        .key('x', Items.LEATHER)
-//                        .key('o', ModItems.PURP_BUX.get()),
-//                consumer,
-//                "wallet"
-//        );
+        register(
+                ShapedRecipeBuilder.shapedRecipe(ModBlocks.SVELTEBUX_GRAVESTONE.get())
+                        .patternLine("xox")
+                        .patternLine(" i ")
+                        .patternLine("kkk")
+                        .key('x', Tags.Items.STONE)
+                        .key('o', Items.ORANGE_DYE)
+                        .key('i', ModItems.PURP_BUX.get())
+                        .key('k', Items.STONE_SLAB)
+                        .addCriterion("stone", hasItem(Tags.Items.STONE)),
+                consumer,
+                "sveltebux_gravestone"
+        );
 
         for (Class<?> wallet1 : Wallets.wallets) {
             Class<AbstractWallet> walletClass = (Class<AbstractWallet>) wallet1;

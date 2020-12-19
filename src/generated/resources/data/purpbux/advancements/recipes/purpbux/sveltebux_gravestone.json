@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "rewards": {
+    "recipes": [
+      "purpbux:sveltebux_gravestone"
+    ]
+  },
+  "criteria": {
+    "stone": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "tag": "forge:stone"
+          }
+        ]
+      }
+    },
+    "has_the_recipe": {
+      "trigger": "minecraft:recipe_unlocked",
+      "conditions": {
+        "recipe": "purpbux:sveltebux_gravestone"
+      }
+    }
+  },
+  "requirements": [
+    [
+      "stone",
+      "has_the_recipe"
+    ]
+  ]
+}

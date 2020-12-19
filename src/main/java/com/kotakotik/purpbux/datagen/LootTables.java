@@ -16,6 +16,7 @@ public class LootTables extends BaseLootTableProvider {
         basicTable(ModBlocks.BUX_PILE);
         basicTable(ModBlocks.BUX_STATION);
         basicTable(ModBlocks.EXP_EXTRACTOR);
+        basicTable(ModBlocks.SVELTEBUX_GRAVESTONE.get());
     }
 
     private void basicTable(Block block) {

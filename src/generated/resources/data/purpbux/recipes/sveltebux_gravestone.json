@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "xox",
+    " i ",
+    "kkk"
+  ],
+  "key": {
+    "x": {
+      "tag": "forge:stone"
+    },
+    "o": {
+      "item": "minecraft:orange_dye"
+    },
+    "i": {
+      "item": "purpbux:purp_bux"
+    },
+    "k": {
+      "item": "minecraft:stone_slab"
+    }
+  },
+  "result": {
+    "item": "purpbux:sveltebux_gravestone"
+  }
+}

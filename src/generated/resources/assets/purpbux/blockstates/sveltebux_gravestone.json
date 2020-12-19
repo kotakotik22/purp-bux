@@ -1,0 +1,50 @@
+{
+  "variants": {
+    "facing=down,has_flower=false": {
+      "model": "purpbux:block/sveltebux_gravestone",
+      "x": 90
+    },
+    "facing=up,has_flower=false": {
+      "model": "purpbux:block/sveltebux_gravestone",
+      "x": -90
+    },
+    "facing=north,has_flower=false": {
+      "model": "purpbux:block/sveltebux_gravestone"
+    },
+    "facing=south,has_flower=false": {
+      "model": "purpbux:block/sveltebux_gravestone",
+      "y": 180
+    },
+    "facing=west,has_flower=false": {
+      "model": "purpbux:block/sveltebux_gravestone",
+      "y": 270
+    },
+    "facing=east,has_flower=false": {
+      "model": "purpbux:block/sveltebux_gravestone",
+      "y": 90
+    },
+    "facing=down,has_flower=true": {
+      "model": "purpbux:block/sveltebux_gravestone_flower",
+      "x": 90
+    },
+    "facing=up,has_flower=true": {
+      "model": "purpbux:block/sveltebux_gravestone_flower",
+      "x": -90
+    },
+    "facing=north,has_flower=true": {
+      "model": "purpbux:block/sveltebux_gravestone_flower"
+    },
+    "facing=south,has_flower=true": {
+      "model": "purpbux:block/sveltebux_gravestone_flower",
+      "y": 180
+    },
+    "facing=west,has_flower=true": {
+      "model": "purpbux:block/sveltebux_gravestone_flower",
+      "y": 270
+    },
+    "facing=east,has_flower=true": {
+      "model": "purpbux:block/sveltebux_gravestone_flower",
+      "y": 90
+    }
+  }
+}
