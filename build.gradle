@@ -113,6 +113,9 @@ dependencies {
     compileOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${top_version}:api")
     runtimeOnly fg.deobf("mcjty.theoneprobe:TheOneProbe-1.16:${top_version}")
 
+    // jei not used as a dependency, just for convenience during development
+    runtimeOnly fg.deobf("mezz.jei:jei-1.16.4:${jei_version}")
+
     // The 'provided' configuration is for optional dependencies that exist at compile-time but might not at runtime.
     // provided 'com.mod-buildcraft:buildcraft:6.0.8:dev'
 
@@ -137,7 +140,14 @@ repositories {
 
     }
 
-
+    maven { // JEI
+        name = "Progwml6 maven"
+        url = "https://dvs1.progwml6.com/files/maven/"
+    }
+    maven { // JEI (mirror)
+        name = "ModMaven"
+        url = "https://modmaven.k-4u.nl"
+    }
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
