@@ -1,23 +1,41 @@
 package com.kotakotik.purpbux.items;
 
 import com.kotakotik.purpbux.ModItems;
+import com.kotakotik.purpbux.Purpbux;
 import com.kotakotik.purpbux.utils.PlayerUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.IItemProvider;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class Wallet extends ItemWithNBT {
-    public Wallet(Properties properties) {
-        super(properties);
+public abstract class AbstractWallet extends ItemWithNBT {
+    abstract int getCapacity();
+
+    public abstract Item getPreviousWallet();
+
+    @Nonnull
+    public abstract Item getMaterial();
+
+    public abstract String getWalletName();
+
+    public abstract IItemProvider getProvider();
+
+    public AbstractWallet() {
+        super(
+                new Item.Properties().group(Purpbux.TAB)
+        );
+
     }
 
     @Override
@@ -34,10 +52,11 @@ public class Wallet extends ItemWithNBT {
         return 1;
     }
 
-    public void setStoredBux(ItemStack itemStack, int bux) {
+    public ItemStack setStoredBux(ItemStack itemStack, int bux) {
         CompoundNBT nbt = itemStack.serializeNBT();
         nbt.putInt("storedBux", bux);
         itemStack.setTag(nbt);
+        return itemStack;
     }
 
     public int getStoredBux(ItemStack itemStack) {
@@ -55,13 +74,11 @@ public class Wallet extends ItemWithNBT {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
-        list.add(ttc("message.purpbux_wallet_info", maxBux));
+        list.add(ttc("message.purpbux_wallet_info", getCapacity()));
         list.add(ttc("message.purpbux_wallet", getStoredBux(stack)));
         list.add(ttc("message.purpbux_wallet_add"));
         list.add(ttc("message.purpbux_wallet_remove"));
     }
-
-    public int maxBux = 1000;
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, PlayerEntity playerIn, Hand handIn) {
@@ -87,12 +104,12 @@ public class Wallet extends ItemWithNBT {
                 ItemStack stackInSlot = playerIn.inventory.getStackInSlot(i);
 
                 if (stackInSlot.getItem().equals(ModItems.PURP_BUX.get())) {
-                    if (stackInSlot.getCount() + (currentBux + toAdd) <= maxBux) {
+                    if (stackInSlot.getCount() + (currentBux + toAdd) <= getCapacity()) {
                         playerIn.inventory.removeStackFromSlot(i);
                         toAdd += stackInSlot.getCount();
                     } else {
                         int stackCount = stackInSlot.getCount();
-                        int t1 = maxBux - (currentBux + toAdd);
+                        int t1 = getCapacity() - (currentBux + toAdd);
                         stackInSlot.setCount(stackCount - t1);
                         toAdd += t1;
                     }

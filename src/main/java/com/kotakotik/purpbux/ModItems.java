@@ -1,7 +1,6 @@
 package com.kotakotik.purpbux;
 
-import com.kotakotik.purpbux.items.ExpBottle;
-import com.kotakotik.purpbux.items.Wallet;
+import com.kotakotik.purpbux.items.*;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
@@ -23,8 +22,10 @@ public class ModItems {
                 }
             });
 
-    public static final RegistryObject<Item> WALLET = Registration.ITEMS.register("wallet", () ->
-            new Wallet(new Item.Properties().group(Purpbux.TAB)));
+    public static final RegistryObject<Item> WALLET = Registration.ITEMS.register("wallet", BasicWallet::new);
+    public static final RegistryObject<Item> WALLETMK2 = Registration.ITEMS.register("walletmk2", WalletMK2::new);
+    public static final RegistryObject<Item> WALLETMK3 = Registration.ITEMS.register("walletmk3", WalletMK3::new);
+    public static final RegistryObject<Item> WALLETMK4 = Registration.ITEMS.register("walletmk4", WalletMK4::new);
 
     public static final RegistryObject<Item> EXP_BOTTLE = Registration.ITEMS.register("exp_bottle", () ->
             new ExpBottle(new Item.Properties().group(Purpbux.TAB).food(new Food.Builder()

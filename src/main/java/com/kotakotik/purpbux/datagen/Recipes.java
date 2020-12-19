@@ -3,6 +3,8 @@ package com.kotakotik.purpbux.datagen;
 import com.kotakotik.purpbux.ModBlocks;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.Purpbux;
+import com.kotakotik.purpbux.items.AbstractWallet;
+import com.kotakotik.purpbux.items.Wallets;
 import net.minecraft.advancements.criterion.InventoryChangeTrigger;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.*;
@@ -90,16 +92,39 @@ public class Recipes extends RecipeProvider {
                 "bux"
         );
 
-        register(ShapedRecipeBuilder.shapedRecipe(ModItems.WALLET.get(), 1)
-                        .addCriterion("leather", InventoryChangeTrigger.Instance.forItems(Items.LEATHER))
-                        .patternLine("x x")
-                        .patternLine("xox")
-                        .patternLine("xxx")
-                        .key('x', Items.LEATHER)
-                        .key('o', ModItems.PURP_BUX.get()),
-                consumer,
-                "wallet"
-        );
+//        register(ShapedRecipeBuilder.shapedRecipe(ModItems.WALLET.get(), 1)
+//                        .addCriterion("leather", InventoryChangeTrigger.Instance.forItems(Items.LEATHER))
+//                        .patternLine("x x")
+//                        .patternLine("xox")
+//                        .patternLine("xxx")
+//                        .key('x', Items.LEATHER)
+//                        .key('o', ModItems.PURP_BUX.get()),
+//                consumer,
+//                "wallet"
+//        );
+
+        for (Class<?> wallet1 : Wallets.wallets) {
+            Class<AbstractWallet> walletClass = (Class<AbstractWallet>) wallet1;
+            AbstractWallet wallet = null;
+            try {
+                wallet = walletClass.newInstance();
+            } catch (InstantiationException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+            assert wallet != null;
+            register(ShapedRecipeBuilder.shapedRecipe(wallet.getProvider(), 1)
+                            .addCriterion("wallet_" + wallet.getWalletName() + "_criterion", InventoryChangeTrigger.Instance.forItems(wallet.getMaterial()))
+                            .patternLine("x x")
+                            .patternLine("xox")
+                            .patternLine("xxx")
+                            .key('x', wallet.getMaterial())
+                            .key('o', wallet.getPreviousWallet() == null ? ModItems.PURP_BUX.get() : wallet.getPreviousWallet()),
+                    consumer,
+                    "wallet_" + wallet.getWalletName()
+            );
+        }
     }
 
     private void register(ShapelessRecipeBuilder recipeBuilder, Consumer<IFinishedRecipe> consumer, String name) {
