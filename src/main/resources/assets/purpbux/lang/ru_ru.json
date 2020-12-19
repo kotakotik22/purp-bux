@@ -8,6 +8,6 @@
   "item.purpbux.wallet": "Кошелёк с баксами",
   "itemGroup.purpbux": "ФиолБакс",
   "message.purpbux_wallet": "Текущее количество Баксов: %s",
-  "message.purpbux_wallet_remove": "Чтобы убрать, присядте и нажмите ПКМ",
+  "message.purpbux_wallet_remove": "Чтобы убрать, присядьте и нажмите ПКМ",
   "message.purpbux_wallet_add": "Чтобы добавить, нажмите ПКМ"
 }

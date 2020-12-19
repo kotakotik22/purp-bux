@@ -28,4 +28,7 @@ The dev release is for very unstable versions. These are added almost every comm
 Just a warning (I guess): I'm not working on this mod seriously, I
 am working on it more seriously than other mods, but I will
 still probably abandon it soon, I am using this to
-learn Git, Github and Forge developlent
+learn Git, Github and Forge development
+
+Also, thanks to [Husker's Discord server](https://discord.gg/53ZxcjgPFK) and Husker himself for helping me with the translation
+
