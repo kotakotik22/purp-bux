@@ -31,6 +31,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.fml.network.NetworkHooks;
 import net.minecraftforge.items.ItemStackHandler;
 
@@ -46,7 +47,9 @@ public class BuxStation extends Block {
         super(Block.Properties
                 .create(Material.IRON)
                 .hardnessAndResistance(3, 10)
-                .harvestLevel(1)
+                .harvestLevel(2)
+                .harvestTool(ToolType.PICKAXE)
+                .setRequiresTool()
                 .sound(SoundType.METAL));
         this.setDefaultState(
                 this.getStateContainer().getBaseState()

@@ -24,6 +24,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -35,7 +36,9 @@ public class ExpExtractor extends Block {
         super(Block.Properties
                 .create(Material.IRON)
                 .hardnessAndResistance(3, 10)
-                .harvestLevel(1)
+                .harvestLevel(2)
+                .harvestTool(ToolType.PICKAXE)
+                .setRequiresTool()
                 .sound(SoundType.METAL));
     }
 
