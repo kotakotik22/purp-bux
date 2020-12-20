@@ -21,6 +21,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ToolType;
 import net.minecraftforge.common.util.Constants;
 
 public class SveltebuxGravestone extends Block {
@@ -33,7 +34,9 @@ public class SveltebuxGravestone extends Block {
     public static final VoxelShape SHAPE_W = VoxelShapes.combineAndSimplify(Block.makeCuboidShape(1, 0, 2, 15, 1, 14), Block.makeCuboidShape(12, 1, 2, 15, 15, 14), IBooleanFunction.OR);
 
     public SveltebuxGravestone() {
-        super(Block.Properties.create(Material.ROCK, MaterialColor.STONE).setRequiresTool().hardnessAndResistance(2.0F, 6.0F));
+        super(
+                Block.Properties.create(Material.ROCK, MaterialColor.STONE).setRequiresTool().hardnessAndResistance(2.0F, 6.0F).harvestLevel(0).harvestTool(ToolType.PICKAXE)
+        );
         this.setDefaultState(
                 this.getStateContainer().getBaseState()
                         .with(HAS_FLOWER, false)

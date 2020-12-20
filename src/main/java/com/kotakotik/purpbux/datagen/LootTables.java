@@ -16,7 +16,7 @@ public class LootTables extends BaseLootTableProvider {
         basicTable(ModBlocks.BUX_PILE);
         basicTable(ModBlocks.BUX_STATION);
         basicTable(ModBlocks.EXP_EXTRACTOR);
-        basicTable(ModBlocks.SVELTEBUX_GRAVESTONE.get());
+        basicTable(ModBlocks.SVELTEBUX_GRAVESTONE); // yes i removed the .get() and i know that it doesnt change anything, i just did it so it looks better
     }
 
     private void basicTable(Block block) {

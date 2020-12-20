@@ -35,6 +35,6 @@ public class ModBlocks {
     }
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
-        return register(name, block, 0);
+        return register(name, block, 64); // no idea if changing from 0 to 64 actually changes anything
     }
 }
