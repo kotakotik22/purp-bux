@@ -14,9 +14,17 @@ public class LootTables extends BaseLootTableProvider {
     @Override
     protected void addTables() {
         basicTable(ModBlocks.BUX_PILE);
-        basicTable(ModBlocks.BUX_STATION);
+        basicNBTTable(ModBlocks.BUX_STATION, "inputInv", "buxInv");
         basicTable(ModBlocks.EXP_EXTRACTOR);
         basicTable(ModBlocks.SVELTEBUX_GRAVESTONE); // yes i removed the .get() and i know that it doesnt change anything, i just did it so it looks better
+    }
+
+    private void basicNBTTable(Block block, String... NBT) {
+        lootTables.put(block, createStandardNBTTable(block.asItem().getName().getString(), block, NBT));
+    }
+
+    private void basicNBTTable(RegistryObject<Block> block, String... NBT) {
+        basicNBTTable(block.get(), NBT);
     }
 
     private void basicTable(Block block) {

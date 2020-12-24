@@ -36,18 +36,33 @@ public abstract class BaseLootTableProvider extends LootTableProvider {
 
     protected abstract void addTables();
 
+    protected LootTable.Builder createStandardNBTTable(String name, Block block, String... NBT) {
+        LootPool.Builder builder = LootPool.builder()
+                .name(name)
+                .rolls(ConstantRange.of(1));
+        ItemLootEntry.Builder<?> itemLootEntry = ItemLootEntry.builder(block)
+                .acceptFunction(CopyName.builder(CopyName.Source.BLOCK_ENTITY))
+                .acceptFunction(SetContents.builderIn()
+                        .addLootEntry(DynamicLootEntry.func_216162_a(new ResourceLocation("minecraft", "contents"))));
+        CopyNbt.Builder copyNbt = CopyNbt.builder(CopyNbt.Source.BLOCK_ENTITY);
+
+        for (String nbt1 : NBT) {
+            copyNbt.addOperation(nbt1, "BlockEntityTag." + nbt1, CopyNbt.Action.REPLACE);
+        }
+
+        itemLootEntry.acceptFunction(copyNbt);
+
+        builder.addEntry(itemLootEntry);
+
+
+        return LootTable.builder().addLootPool(builder);
+    }
+
     protected LootTable.Builder createStandardTable(String name, Block block) {
         LootPool.Builder builder = LootPool.builder()
                 .name(name)
                 .rolls(ConstantRange.of(1))
-                .addEntry(ItemLootEntry.builder(block)
-                        .acceptFunction(CopyName.builder(CopyName.Source.BLOCK_ENTITY))
-                        .acceptFunction(CopyNbt.builder(CopyNbt.Source.BLOCK_ENTITY)
-                                .addOperation("inv", "BlockEntityTag.inv", CopyNbt.Action.REPLACE)
-                                .addOperation("energy", "BlockEntityTag.energy", CopyNbt.Action.REPLACE))
-                        .acceptFunction(SetContents.builderIn()
-                                .addLootEntry(DynamicLootEntry.func_216162_a(new ResourceLocation("minecraft", "contents"))))
-                );
+                .addEntry(ItemLootEntry.builder(block));
         return LootTable.builder().addLootPool(builder);
     }
 

@@ -130,17 +130,12 @@ public class BuxStation extends Block {
             TileEntity tileentity = worldIn.getTileEntity(pos);
             if (tileentity instanceof BuxStationTile) {
                 BuxStationTile tile = (BuxStationTile) tileentity;
-//                tile.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY).ifPresent(h -> {
-//                    for (int i = 0; i < h.getSlots(); i++) {
-//                        spawnAsEntity(worldIn, pos, h.getStackInSlot(i));
-//                        h
-//                    }
-//                });
                 ItemStackHandler[] handlers = tile.handlers;
-                for (int i = 0; i < handlers.length; i++) {
-                    ItemStackHandler handler = handlers[i];
-                    spawnAsEntity(worldIn, pos, handler.getStackInSlot(i));
-                    handler.setStackInSlot(0, ItemStack.EMPTY);
+                for (ItemStackHandler handler : handlers) {
+                    for (int ii = 0; ii < handler.getSlots(); ii++) {
+                        spawnAsEntity(worldIn, pos, handler.getStackInSlot(ii));
+                        handler.setStackInSlot(ii, ItemStack.EMPTY);
+                    }
                 }
             }
 

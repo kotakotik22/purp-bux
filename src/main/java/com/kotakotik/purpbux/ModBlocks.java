@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 public class ModBlocks {
     public static final RegistryObject<Block> BUX_STATION = register("bux_station", ModList.get().getModContainerById("theoneprobe").isPresent() ? BuxStationTOP::new : BuxStation::new, 1);
     public static final RegistryObject<Block> EXP_EXTRACTOR = register("exp_extractor", ExpExtractor::new, 1);
-    public static final RegistryObject<Block> BUX_PILE = register("bux_pile", BuxPile::new, 1);
+    public static final RegistryObject<Block> BUX_PILE = register("bux_pile", BuxPile::new);
     public static final RegistryObject<Block> SVELTEBUX_GRAVESTONE = register("sveltebux_gravestone", SveltebuxGravestone::new);
 
 
