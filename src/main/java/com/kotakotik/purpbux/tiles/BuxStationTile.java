@@ -28,6 +28,7 @@ import java.util.Iterator;
 public class BuxStationTile extends TileEntityBasicTickable {
     public int progress = 0;
     public int totalProgress = totalProgressGlobal;
+    public int stationVersion = 1;
     public static final int totalProgressGlobal = 20 * 5;
 
     public int getProgress() {
@@ -195,15 +196,24 @@ public class BuxStationTile extends TileEntityBasicTickable {
 
         tag.putInt("progress", progress);
         tag.putInt("totalProgress", totalProgress);
+
+        tag.putInt("stationVersion", stationVersion);
     }
 
     @Override
     public void deserialize(CompoundNBT tag) {
+        if (tag.getInt("stationVersion") < 1) {
+            serialize(tag);
+        }
         itemInputHandler.deserializeNBT(tag.getCompound("inputInv"));
         itemBuxHandler.deserializeNBT(tag.getCompound("buxInv"));
 
         totalProgress = tag.getInt("totalProgress");
         progress = tag.getInt("progress");
+
+        if (tag.contains("stationVersion")) {
+            stationVersion = tag.getInt("stationVersion");
+        }
     }
 
     @Override
