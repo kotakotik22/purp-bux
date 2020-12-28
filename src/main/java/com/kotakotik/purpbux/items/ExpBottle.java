@@ -1,5 +1,6 @@
 package com.kotakotik.purpbux.items;
 
+import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.utils.PlayerUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -22,12 +23,13 @@ public class ExpBottle extends Item {
         super(properties);
     }
 
-    public static final int expToGive = 20;
+//    public static final int expToGive = Config.EXP_BOTTLE_EXP_OBTAINED.get();
 
     @Nonnull
     @Override
     public ItemStack onItemUseFinish(ItemStack stack, World worldIn, LivingEntity entityLiving) {
 //        System.out.println(worldIn.isRemote);
+        int expToGive = Config.EXP_BOTTLE_EXP_OBTAINED.get();
 
         if (!worldIn.isRemote) {
             ((PlayerEntity) entityLiving).giveExperiencePoints(expToGive);
@@ -61,6 +63,7 @@ public class ExpBottle extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
+        int expToGive = Config.EXP_BOTTLE_EXP_OBTAINED.get();
         list.add(new TranslationTextComponent("message.purpbux_exp_bottle", expToGive));
     }
 }

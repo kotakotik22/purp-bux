@@ -1,6 +1,7 @@
 package com.kotakotik.purpbux.tiles;
 
 import com.kotakotik.purpbux.ClientStorage;
+import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.ModTiles;
 import net.darkhax.bookshelf.block.tileentity.TileEntityBasicTickable;
@@ -27,16 +28,20 @@ import java.util.Iterator;
 
 public class BuxStationTile extends TileEntityBasicTickable {
     public int progress = 0;
-    public int totalProgress = totalProgressGlobal;
+    public int totalProgress = Config.BUX_STATION_SECONDS_REQUIRED.get() * 20; // honestly i have no idea why im giving each bux station its own required ticks
     public int stationVersion = 1;
-    public static final int totalProgressGlobal = 20 * 5;
+//    public static final int totalProgressGlobal = Config.BUX_STATION_SECONDS_REQUIRED.get() * 20; // multiplied by 20 to convert to ticks
+
+    public static int getTotalProgressGlobal() {
+        return Config.BUX_STATION_SECONDS_REQUIRED.get() * 20; // multiplied by 20 to convert to ticks
+    }
 
     public int getProgress() {
         return progress;
     }
 
     public int getTotalProgress() {
-        return totalProgress;
+        return Config.BUX_STATION_SECONDS_REQUIRED.get() * 20;
     }
 
     public final ItemStackHandler itemInputHandler = createHandler(Items.PAPER, ModItems.EXP_BOTTLE.get());
@@ -79,6 +84,7 @@ public class BuxStationTile extends TileEntityBasicTickable {
         if (!paper.isEmpty() && !exp_bottle.isEmpty() && out_bux.getCount() < 64) {
             progress++;
             if (progress >= totalProgress) {
+                totalProgress = Config.BUX_STATION_SECONDS_REQUIRED.get() * 20;
                 progress = 0;
                 ItemStack paper_copy = paper.copy();
                 ItemStack exp_bottle_copy = exp_bottle.copy();

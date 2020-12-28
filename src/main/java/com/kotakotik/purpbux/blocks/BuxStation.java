@@ -1,6 +1,7 @@
 package com.kotakotik.purpbux.blocks;
 
 import com.kotakotik.purpbux.ClientStorage;
+import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.containers.BuxStationContainer;
 import com.kotakotik.purpbux.tiles.BuxStationTile;
 import net.minecraft.block.Block;
@@ -145,6 +146,6 @@ public class BuxStation extends Block {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
-        list.add(new TranslationTextComponent("message.purpbux_station", BuxStationTile.totalProgressGlobal / 20));
+        list.add(new TranslationTextComponent("message.purpbux_station", Config.BUX_STATION_SECONDS_REQUIRED.get()));
     }
 }

@@ -1,5 +1,6 @@
 package com.kotakotik.purpbux.blocks;
 
+import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.utils.PlayerUtils;
 import net.minecraft.block.Block;
@@ -64,11 +65,14 @@ public class ExpExtractor extends Block {
         return state.rotate(mirrorIn.toRotation(state.get(FACING)));
     }
 
-    private final static int neededExp = 50;
+    public static final int getNeededExp() {
+        return Config.EXP_EXTRACTOR_EXP_REQUIRED.get();
+    }
 
     @Override
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         Hand hand = PlayerUtils.getHandWithItem(player, Items.GLASS_BOTTLE);
+        int neededExp = getNeededExp();
 
         if (hand != null && player.experienceTotal >= neededExp) {
             ItemStack bottle = player.getHeldItem(hand);
@@ -83,6 +87,6 @@ public class ExpExtractor extends Block {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
-        list.add(new TranslationTextComponent("message.purpbux_exp_extractor", neededExp));
+        list.add(new TranslationTextComponent("message.purpbux_exp_extractor", getNeededExp()));
     }
 }
