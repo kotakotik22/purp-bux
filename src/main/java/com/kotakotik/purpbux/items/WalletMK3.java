@@ -10,8 +10,8 @@ import javax.annotation.Nullable;
 
 public class WalletMK3 extends AbstractWallet {
     @Override
-    int getCapacity() {
-        return 64 * 8;
+    int getWalletnum() {
+        return 3;
     }
 
     @Nullable

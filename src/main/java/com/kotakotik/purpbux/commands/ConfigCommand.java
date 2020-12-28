@@ -12,6 +12,7 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 public class ConfigCommand implements Command<CommandSource> {
@@ -22,7 +23,10 @@ public class ConfigCommand implements Command<CommandSource> {
     public static final ConfigPart[] Configs = new ConfigPart[]{
             new ConfigPart("buxStationSecondsRequired", ConfigPart.ConfigType.NUMBER, Config.BUX_STATION_SECONDS_REQUIRED),
             new ConfigPart("expExtractorExpRequired", ConfigPart.ConfigType.NUMBER, Config.EXP_EXTRACTOR_EXP_REQUIRED),
-            new ConfigPart("expBottleExpObtained", ConfigPart.ConfigType.NUMBER, Config.EXP_BOTTLE_EXP_OBTAINED)
+            new ConfigPart("expBottleExpObtained", ConfigPart.ConfigType.NUMBER, Config.EXP_BOTTLE_EXP_OBTAINED),
+            new ConfigPart("walletCapacityNumberA", ConfigPart.ConfigType.NUMBER, Config.WALLET_CAPACITY_NUMBER_A),
+            new ConfigPart("walletCapacityNumberB", ConfigPart.ConfigType.NUMBER, Config.WALLET_CAPACITY_NUMBER_B),
+            new ConfigPart("buxStationMaxStack", ConfigPart.ConfigType.NUMBER, Config.BUX_STATION_MAX_STACK)
             // do i really have to put so much info?
     };
 
@@ -46,7 +50,6 @@ public class ConfigCommand implements Command<CommandSource> {
             command.then(Commands.literal(name)
                     .then(Commands.argument("value", commandType).executes(context -> {
                         Object val;
-                        System.out.println("heldssssdrgdfhdthtdhf5ejrjilobatr.kuihtrjhunsgh");
                         // i know im kinda using the same switch here but i dint know how not to do that
                         switch (type) {
                             case NUMBER:
@@ -59,8 +62,13 @@ public class ConfigCommand implements Command<CommandSource> {
                                 val = StringArgumentType.getString(context, "value");
                         }
                         value.set(val);
+                        CommandSource commandsource = (CommandSource) context.getSource();
+                        commandsource.sendFeedback(new StringTextComponent(name + " set to " + val), false);
                         return 1;
-                    })));
+                    })).executes(context -> {
+                        ((CommandSource) context.getSource()).sendFeedback(new StringTextComponent("value of " + name + " is " + value.get()), false);
+                        return 1;
+                    }));
         }
         command.requires(cs -> cs.hasPermissionLevel(2));
         return command;

@@ -14,6 +14,9 @@ public class Config {
     public static ForgeConfigSpec.IntValue BUX_STATION_SECONDS_REQUIRED;
     public static ForgeConfigSpec.IntValue EXP_EXTRACTOR_EXP_REQUIRED;
     public static ForgeConfigSpec.IntValue EXP_BOTTLE_EXP_OBTAINED;
+    public static ForgeConfigSpec.IntValue BUX_STATION_MAX_STACK;
+    public static ForgeConfigSpec.IntValue WALLET_CAPACITY_NUMBER_A;
+    public static ForgeConfigSpec.IntValue WALLET_CAPACITY_NUMBER_B;
 
     static {
         ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
@@ -28,6 +31,15 @@ public class Config {
 
         EXP_BOTTLE_EXP_OBTAINED = SERVER_BUILDER.comment("Experience obtained from drinking bottled experience - recommended to be less than the required exp to create")
                 .defineInRange("expBottleExpObtained", 20, 0, Integer.MAX_VALUE);
+
+        BUX_STATION_MAX_STACK = SERVER_BUILDER.comment("Maximum amount of items that can be stored ina Purpbux slot. Warning: Very glitchy!")
+                .defineInRange("buxStationMaxStack", 64, 0, Integer.MAX_VALUE);
+
+        WALLET_CAPACITY_NUMBER_A = SERVER_BUILDER.comment("The number A used to determine the capacity of a wallet: A * (B ^ walletnum)")
+                .defineInRange("walletCapacityNumberA", 64, 0, Integer.MAX_VALUE);
+
+        WALLET_CAPACITY_NUMBER_B = SERVER_BUILDER.comment("The number B used to determine the capacity of a wallet: A * (B ^ walletnum)")
+                .defineInRange("walletCapacityNumberB", 2, 0, Integer.MAX_VALUE);
 
         SERVER_BUILDER.pop();
 

@@ -1,5 +1,6 @@
 package com.kotakotik.purpbux.items;
 
+import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.Purpbux;
 import com.kotakotik.purpbux.utils.PlayerUtils;
@@ -20,7 +21,11 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public abstract class AbstractWallet extends ItemWithNBT {
-    abstract int getCapacity();
+    int getCapacity() {
+        return (int) (Config.WALLET_CAPACITY_NUMBER_A.get() * Math.pow(Config.WALLET_CAPACITY_NUMBER_B.get(), getWalletnum()));
+    }
+
+    abstract int getWalletnum();
 
     public abstract Item getPreviousWallet();
 

@@ -81,7 +81,7 @@ public class BuxStationTile extends TileEntityBasicTickable {
         ItemStack paper = itemInputHandler.getStackInSlot(0);
         ItemStack exp_bottle = itemInputHandler.getStackInSlot(1);
         ItemStack out_bux = itemBuxHandler.getStackInSlot(0);
-        if (!paper.isEmpty() && !exp_bottle.isEmpty() && out_bux.getCount() < 64) {
+        if (!paper.isEmpty() && !exp_bottle.isEmpty() && out_bux.getCount() < Config.BUX_STATION_MAX_STACK.get()) {
             progress++;
             if (progress >= totalProgress) {
                 totalProgress = Config.BUX_STATION_SECONDS_REQUIRED.get() * 20;
@@ -156,6 +156,11 @@ public class BuxStationTile extends TileEntityBasicTickable {
                     return stack;
                 }
                 return super.insertItem(slot, stack, simulate);
+            }
+
+            @Override
+            protected int getStackLimit(int slot, @Nonnull ItemStack stack) {
+                return Config.BUX_STATION_MAX_STACK.get();
             }
         };
     }

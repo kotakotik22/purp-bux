@@ -9,8 +9,8 @@ import javax.annotation.Nonnull;
 
 public class WalletMK2 extends AbstractWallet {
     @Override
-    int getCapacity() {
-        return 64 * 4;
+    int getWalletnum() {
+        return 2;
     }
 
     @Override
