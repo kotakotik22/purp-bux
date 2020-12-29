@@ -1,9 +1,10 @@
 # Purp Bux
 
+## [CurseForge project](https://www.curseforge.com/minecraft/mc-mods/purpbux)
+
 ![showcase](https://github.com/kotakotik22/purp-bux/blob/latest/showcase.png?raw=true)
 
-A mod that adds money to the game! The money can be made by combining
-experience and paper in the Purp Bux Station
+A mod that adds money to the game! The money can be made by combining experience and paper in the Purp Bux Station
 
 ###### This mod is basically a new version of the Svelte Bux which I made for a server
 
