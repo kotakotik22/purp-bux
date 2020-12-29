@@ -19,6 +19,10 @@
   "message.purpbux_exp_bottle": "Опыт в бутылке может быть создан используя Экстрактор Опыта. Если выпить это, даётся %s очков опыта.",
   "message.purpbux_wallet_info": "Этот кошелёк позволяет хранить %s Фиолбаксов внутри него.",
   "message.purpbux": "Это Фиолбакс. У него впринципе нет никакого применения кроме как торговать с другими игроками.",
+  "message.purpbux_creation_time": "%s секунд",
+  "message.purpbux_exp_bottle_required_orbs": "%s очков опыта",
   "advancement.purpbux_purp_bux_advancement": "Все же деньги растут на деревьях",
-  "advancement.purpbux_purp_bux_advancement_desc": "Получите Фиолбакс, используя Бакс станцию"
+  "advancement.purpbux_purp_bux_advancement_desc": "Получите Фиолбакс, используя Бакс станцию",
+  "purpbux.jei.purpbux_create": "Создание ФиолБакса",
+  "purpbux.jei.exp_bottle_create": "Создание бутылки опыта"
 }

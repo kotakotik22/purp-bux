@@ -19,6 +19,10 @@
   "message.purpbux_exp_bottle": "The bottled experience can be created using the Experience extractor. Drinking this gives you %s experience points.",
   "message.purpbux_wallet_info": "This wallet lets you store %s Purp bux inside of it.",
   "message.purpbux": "This is a Purp buck. It has basically no use other than trading with other players.",
+  "message.purpbux_creation_time": "%s seconds",
+  "message.purpbux_exp_bottle_required_orbs": "%s experience points",
   "advancement.purpbux_purp_bux_advancement": "Money grows on trees afterall",
-  "advancement.purpbux_purp_bux_advancement_desc": "Obtain Purpbux using the Bux station"
+  "advancement.purpbux_purp_bux_advancement_desc": "Obtain Purpbux using the Bux station",
+  "purpbux.jei.purpbux_create": "Purpbux creation",
+  "purpbux.jei.exp_bottle_create": "Experience bottle creation"
 }
