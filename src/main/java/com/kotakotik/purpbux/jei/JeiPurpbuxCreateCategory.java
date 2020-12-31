@@ -5,7 +5,7 @@ import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.ModBlocks;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.Purpbux;
-import com.kotakotik.purpbux.jei.recipes.purpbux.JeiPurpbuxCreateRecipe;
+import com.kotakotik.purpbux.jei.recipes.JeiPurpbuxCreateRecipe;
 import com.kotakotik.purpbux.translation.TranslationKeys;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import mezz.jei.api.constants.VanillaTypes;

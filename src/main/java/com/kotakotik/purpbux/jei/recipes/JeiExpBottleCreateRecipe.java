@@ -1,4 +1,4 @@
-package com.kotakotik.purpbux.jei.recipes.purpbux;
+package com.kotakotik.purpbux.jei.recipes;
 
 import net.minecraft.item.Item;
 
