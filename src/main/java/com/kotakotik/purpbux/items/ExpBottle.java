@@ -1,6 +1,7 @@
 package com.kotakotik.purpbux.items;
 
 import com.kotakotik.purpbux.Config;
+import com.kotakotik.purpbux.translation.TranslationKeys;
 import com.kotakotik.purpbux.utils.PlayerUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
@@ -11,7 +12,6 @@ import net.minecraft.item.Items;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.*;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 
 import javax.annotation.Nonnull;
@@ -64,6 +64,6 @@ public class ExpBottle extends Item {
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
         int expToGive = Config.EXP_BOTTLE_EXP_OBTAINED.get();
-        list.add(new TranslationTextComponent("message.purpbux_exp_bottle", expToGive));
+        list.add(TranslationKeys.TOOLTIP_EXP_BOTTLE.getComponent(String.valueOf(expToGive)));
     }
 }

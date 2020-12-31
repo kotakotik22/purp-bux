@@ -6,6 +6,7 @@ import com.kotakotik.purpbux.ModBlocks;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.Purpbux;
 import com.kotakotik.purpbux.jei.recipes.purpbux.JeiExpBottleCreateRecipe;
+import com.kotakotik.purpbux.translation.TranslationKeys;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -19,7 +20,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,7 +56,7 @@ public class JeiExpBottleCreateCategory implements IRecipeCategory<JeiExpBottleC
 
     @Override
     public String getTitle() {
-        return new TranslationTextComponent("purpbux.jei.exp_bottle_create").getString();
+        return TranslationKeys.JEI_EXP_BOTTLE_CREATION.translate();
     }
 
     @Override
@@ -103,7 +103,7 @@ public class JeiExpBottleCreateCategory implements IRecipeCategory<JeiExpBottleC
         int reqExp = Config.EXP_EXTRACTOR_EXP_REQUIRED.get();
 
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
-        String help = new TranslationTextComponent("message.purpbux_exp_bottle_required_orbs", reqExp).getString();
+        String help = TranslationKeys.JEI_EXP_BOTTLE_EXP_REQUIRED.translate(String.valueOf(reqExp));
         fontRenderer.drawString(matrixStack, help, 64 - fontRenderer.getStringWidth(help) / 2f, 70, 0xff404040);
     }
 }

@@ -3,6 +3,7 @@ package com.kotakotik.purpbux.items;
 import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.Purpbux;
+import com.kotakotik.purpbux.translation.TranslationKeys;
 import com.kotakotik.purpbux.utils.PlayerUtils;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
@@ -79,10 +80,10 @@ public abstract class AbstractWallet extends ItemWithNBT {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
-        list.add(ttc("message.purpbux_wallet_info", getCapacity()));
-        list.add(ttc("message.purpbux_wallet", getStoredBux(stack)));
-        list.add(ttc("message.purpbux_wallet_add"));
-        list.add(ttc("message.purpbux_wallet_remove"));
+        list.add(TranslationKeys.TOOLTIP_WALLET_INFO.getComponent(String.valueOf(getCapacity())));
+        list.add(TranslationKeys.TOOLTIP_WALLET.getComponent(String.valueOf(getStoredBux(stack))));
+        list.add(TranslationKeys.TOOLTIP_WALLET_ADD.getComponent());
+        list.add(TranslationKeys.TOOLTIP_WALLET_REMOVE.getComponent());
     }
 
     @Override

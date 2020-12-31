@@ -16,10 +16,10 @@
       "item": "purpbux:purp_bux"
     },
     "title": {
-      "translate": "advancement.purpbux_purp_bux_advancement"
+      "translate": "advancement.purpbux.purp_bux_advancement"
     },
     "description": {
-      "translate": "advancement.purpbux_purp_bux_advancement_desc"
+      "translate": "advancement.purpbux.purp_bux_advancement_desc"
     }
   },
   "parent": "story/smelt_iron"

@@ -2,6 +2,7 @@ package com.kotakotik.purpbux.blocks;
 
 import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.ModItems;
+import com.kotakotik.purpbux.translation.TranslationKeys;
 import com.kotakotik.purpbux.utils.PlayerUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -22,7 +23,6 @@ import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ToolType;
@@ -87,6 +87,6 @@ public class ExpExtractor extends Block {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
-        list.add(new TranslationTextComponent("message.purpbux_exp_extractor", getNeededExp()));
+        list.add(TranslationKeys.TOOLTIP_EXP_EXTRACTOR.getComponent(String.valueOf(Config.EXP_EXTRACTOR_EXP_REQUIRED.get())));
     }
 }

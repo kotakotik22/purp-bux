@@ -6,6 +6,7 @@ import com.kotakotik.purpbux.ModBlocks;
 import com.kotakotik.purpbux.ModItems;
 import com.kotakotik.purpbux.Purpbux;
 import com.kotakotik.purpbux.jei.recipes.purpbux.JeiPurpbuxCreateRecipe;
+import com.kotakotik.purpbux.translation.TranslationKeys;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.IRecipeLayout;
@@ -19,7 +20,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.text.TranslationTextComponent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +58,7 @@ public class JeiPurpbuxCreateCategory implements IRecipeCategory<JeiPurpbuxCreat
 
     @Override
     public String getTitle() {
-        return new TranslationTextComponent("purpbux.jei.purpbux_create").getString();
+        return TranslationKeys.JEI_PURPBUX_CREATION.translate();
     }
 
     @Override
@@ -111,7 +111,7 @@ public class JeiPurpbuxCreateCategory implements IRecipeCategory<JeiPurpbuxCreat
         int reqSeconds = Config.BUX_STATION_SECONDS_REQUIRED.get();
 
         FontRenderer fontRenderer = Minecraft.getInstance().fontRenderer;
-        String help = new TranslationTextComponent("message.purpbux_creation_time", reqSeconds).getString();
+        String help = TranslationKeys.JEI_PURPBUX_SECONDS_REQUIRED.translate(String.valueOf(reqSeconds));
         fontRenderer.drawString(matrixStack, help, 64 - fontRenderer.getStringWidth(help) / 2f, 70, 0xff404040);
     }
 }

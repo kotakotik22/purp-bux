@@ -4,6 +4,7 @@ import com.kotakotik.purpbux.ClientStorage;
 import com.kotakotik.purpbux.Config;
 import com.kotakotik.purpbux.containers.BuxStationContainer;
 import com.kotakotik.purpbux.tiles.BuxStationTile;
+import com.kotakotik.purpbux.translation.TranslationKeys;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.SoundType;
@@ -146,6 +147,6 @@ public class BuxStation extends Block {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable IBlockReader worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
-        list.add(new TranslationTextComponent("message.purpbux_station", Config.BUX_STATION_SECONDS_REQUIRED.get()));
+        list.add(TranslationKeys.TOOLTIP_BUX_STATION.getComponent(String.valueOf(Config.BUX_STATION_SECONDS_REQUIRED.get())));
     }
 }

@@ -1,12 +1,12 @@
 package com.kotakotik.purpbux;
 
 import com.kotakotik.purpbux.items.*;
+import com.kotakotik.purpbux.translation.TranslationKeys;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.Food;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -18,7 +18,7 @@ public class ModItems {
             new Item(new Item.Properties().group(Purpbux.TAB)) {
                 @Override
                 public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> list, ITooltipFlag flagIn) {
-                    list.add(new TranslationTextComponent("message.purpbux"));
+                    list.add(TranslationKeys.TOOLTIP_PURPBUX.getComponent());
                 }
             });
 
