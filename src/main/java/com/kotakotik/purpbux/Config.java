@@ -35,8 +35,7 @@ public class Config {
     private static ForgeConfigSpec.IntValue createConfig(ForgeConfigSpec.Builder builder, int default1, String comment, String name, int min, int max) {
         confInfo.put(name, new Conf(comment, default1));
 
-        return builder.comment(comment)
-                .comment("default: " + default1)
+        return builder.comment(comment, "default: " + default1)
                 .defineInRange(name, default1, min, max);
     }
 
