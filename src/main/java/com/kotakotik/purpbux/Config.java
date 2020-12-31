@@ -5,6 +5,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 
+import java.util.HashMap;
+
 @Mod.EventBusSubscriber
 public class Config {
     public static final String CATEGORY_GENERAL = "general";
@@ -18,28 +20,69 @@ public class Config {
     public static ForgeConfigSpec.IntValue WALLET_CAPACITY_NUMBER_A;
     public static ForgeConfigSpec.IntValue WALLET_CAPACITY_NUMBER_B;
 
+    public static class Conf {
+        public final String comment;
+        public final Object default1;
+
+        public Conf(String comment, int default1) {
+            this.comment = comment;
+            this.default1 = default1;
+        }
+    }
+
+    public static HashMap<String, Conf> confInfo = new HashMap<>();
+
+    private static ForgeConfigSpec.IntValue createConfig(ForgeConfigSpec.Builder builder, int default1, String comment, String name, int min, int max) {
+        confInfo.put(name, new Conf(comment, default1));
+
+        return builder.comment(comment)
+                .comment("default: " + default1)
+                .defineInRange(name, default1, min, max);
+    }
+
+    private static ForgeConfigSpec.IntValue createConfig(ForgeConfigSpec.Builder builder, int default1, String comment, String name) {
+        return createConfig(builder, default1, comment, name, 0, Integer.MAX_VALUE);
+    }
+
     static {
         ForgeConfigSpec.Builder SERVER_BUILDER = new ForgeConfigSpec.Builder();
 
         SERVER_BUILDER.comment("General settings").push(CATEGORY_GENERAL);
 
-        BUX_STATION_SECONDS_REQUIRED = SERVER_BUILDER.comment("Seconds to make a Purp bux in the Bux station")
-                .defineInRange("buxStationSecondsRequired", 5, 0, Integer.MAX_VALUE);
+        BUX_STATION_SECONDS_REQUIRED = createConfig(SERVER_BUILDER,
+                5,
+                "Seconds to make a Purp bux in the Bux station",
+                "buxStationSecondsRequired"
+        );
 
-        EXP_EXTRACTOR_EXP_REQUIRED = SERVER_BUILDER.comment("Experience points required to create bottled experience in the Experience extractor")
-                .defineInRange("expExtractorExpRequired", 50, 0, Integer.MAX_VALUE);
+        EXP_EXTRACTOR_EXP_REQUIRED = createConfig(SERVER_BUILDER,
+                50,
+                "Experience points required to create bottled experience in the Experience extractor",
+                "expExtractorExpRequired");
 
-        EXP_BOTTLE_EXP_OBTAINED = SERVER_BUILDER.comment("Experience obtained from drinking bottled experience - recommended to be less than the required exp to create")
-                .defineInRange("expBottleExpObtained", 20, 0, Integer.MAX_VALUE);
+        EXP_BOTTLE_EXP_OBTAINED = createConfig(SERVER_BUILDER,
+                20,
+                "Experience obtained from drinking bottled experience - recommended to be less than the required exp to create",
+                "expBottleExpObtained"
+        );
 
-        BUX_STATION_MAX_STACK = SERVER_BUILDER.comment("Maximum amount of items that can be stored ina Purpbux slot. Warning: Very glitchy!")
-                .defineInRange("buxStationMaxStack", 64, 0, Integer.MAX_VALUE);
+        BUX_STATION_MAX_STACK = createConfig(SERVER_BUILDER,
+                64,
+                "Maximum amount of items that can be stored in a Purpbux slot. Warning: Very glitchy!",
+                "buxStationMaxStack"
+        );
 
-        WALLET_CAPACITY_NUMBER_A = SERVER_BUILDER.comment("The number A used to determine the capacity of a wallet: A * (B ^ walletnum)")
-                .defineInRange("walletCapacityNumberA", 64, 0, Integer.MAX_VALUE);
+        WALLET_CAPACITY_NUMBER_A = createConfig(SERVER_BUILDER,
+                64,
+                "The number A used to determine the capacity of a wallet: A * (B ^ walletnum)",
+                "walletCapacityNumberA"
+        );
 
-        WALLET_CAPACITY_NUMBER_B = SERVER_BUILDER.comment("The number B used to determine the capacity of a wallet: A * (B ^ walletnum)")
-                .defineInRange("walletCapacityNumberB", 2, 0, Integer.MAX_VALUE);
+        WALLET_CAPACITY_NUMBER_B = createConfig(SERVER_BUILDER,
+                2,
+                "The number B used to determine the capacity of a wallet: A * (B ^ walletnum)",
+                "walletCapacityNumberB"
+        );
 
         SERVER_BUILDER.pop();
 

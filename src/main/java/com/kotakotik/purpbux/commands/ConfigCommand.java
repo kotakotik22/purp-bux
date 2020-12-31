@@ -66,7 +66,12 @@ public class ConfigCommand implements Command<CommandSource> {
                         commandsource.sendFeedback(new StringTextComponent(name + " set to " + val), false);
                         return 1;
                     })).executes(context -> {
-                        ((CommandSource) context.getSource()).sendFeedback(new StringTextComponent("value of " + name + " is " + value.get()), false);
+                        Config.Conf conf = Config.confInfo.get(name);
+                        ((CommandSource) context.getSource()).sendFeedback(
+                                new StringTextComponent("value of " + name + " is " + value.get() + "\ndefault value: " + conf.default1
+                                        + "\ndescription: " + conf.comment),
+                                false
+                        );
                         return 1;
                     }));
         }
